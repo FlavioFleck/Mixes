@@ -5,6 +5,6 @@ import { connection } from '../connection.js';
 const router = express.Router();
 const userController = new UserController(connection);
 
-router.post('/user', userController.createUser);
+router.post('/register/user', userController.createUser);
 
 export default router;
