@@ -1,5 +1,5 @@
-import UserRepository from "../repositories/UserRepository.js";
 import User from "../models/User.js";
+import UserRepository from "../repositories/UserRepository.js";
 
 export default class UserController{
     constructor(connection){
