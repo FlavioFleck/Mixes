@@ -1,4 +1,5 @@
 import UserRepository from "../repositories/UserRepository.js";
+import User from "../models/User.js";
 
 export default class UserController{
     constructor(connection){
@@ -7,15 +8,9 @@ export default class UserController{
 
     createUser = async(req, res) => {
         const { name, lastname, username, email, password, birthDay } = req.body
-        const user = {
-            name: name,
-            last: lastname,
-            username: username,
-            email: email,
-            password: password,
-            birthDay: birthDay
-        }
+        const user = new User(name, lastname, email, password, birthDay, Date.now())
         const result = await this.userRepository.add(user)
+        res.send({result: result})
     }
 
 }
