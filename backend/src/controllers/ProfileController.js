@@ -1,5 +1,5 @@
-import Profile from "../models/Profile"
-import ProfileRepository from "../repositories/ProfileRepository"
+import Profile from "../models/Profile.js"
+import ProfileRepository from "../repositories/ProfileRepository.js"
 
 export default class ProfileController {
     constructor(connection) {

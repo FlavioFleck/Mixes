@@ -4,10 +4,13 @@ export default class ProfileRepository {
     }
 
     async add(profile) {
-        const query = `INSERT INTO profile (username, bio, profile_image, user_id, created_at) VALUES (?, ?, ?, ?, ?);`
+        const query = `INSERT INTO profile (username, bio, profile_image, user_id, created_at) 
+                            VALUES (?, ?, ?, ?, ?);
+                        `
         const [info] = await this.connection.query(query, [
             profile.username,
             profile.bio,
+            profile.image,
             profile.userId,
             profile.createdAt
         ])
@@ -16,7 +19,8 @@ export default class ProfileRepository {
 
     async delete(id) {
         const query = `
-            DELETE FROM profile WHERE id = ?
+            DELETE FROM profile 
+                WHERE id = ?;
         `
         const [info] = await this.connection.query(query, [id])
         return info.insertId
