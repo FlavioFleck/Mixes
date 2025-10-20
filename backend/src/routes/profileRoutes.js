@@ -7,5 +7,7 @@ const profileController = new ProfileController(connection)
 
 router.post("/create", profileController.createProfile)
 router.post("/delete", profileController.deleteProfile)
+router.get("/get", profileController.viewProfile)
+router.get("get/:id", profileController.viewProfiles)
 
 export default router

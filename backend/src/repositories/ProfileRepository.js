@@ -25,4 +25,27 @@ export default class ProfileRepository {
         const [info] = await this.connection.query(query, [id])
         return info.insertId
     }
+
+    async update(profile) {
+        const query = ``
+        const [info] = await this.connection.query(query, [
+            profile.userId,
+            profile.username,
+            profile.bio,
+            profile.profileImage
+        ])
+        return info.affectedRows
+    }
+
+    async getAll() {
+        const query = `SELECT * FROM profiles;`
+        const [info] = await this.connection.query(query)
+        return info
+    }
+
+    async getById(id) {
+        const query = `SELECT * FROM profiles WHERE id = ?`
+        const [info] = await this.connection.query(query, [id])
+        return info
+    }
 }
