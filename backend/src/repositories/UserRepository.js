@@ -29,18 +29,25 @@ export default class UserRepository{
         return info.affectedRows;
     }
 
-    async update(id) {
+    async update(id, data) {
         const query = `
             UPDATE users
                 SET name = ?,
                     lastname = ?,
                     email = ?,
                     password = ?,
-                    birthday = ?,
+                    birthday = ?
             WHERE id = ?;
         `
 
-        const [info] = await this.connection.query(query, [id]);
+        const [info] = await this.connection.query(query, [
+            data.name,
+            data.lastname,
+            data.email,
+            data.password,
+            data.birthDay,
+            id
+        ]);
         return info.affectedRows;
     }
 
