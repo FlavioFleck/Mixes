@@ -10,9 +10,7 @@ export default class UserController{
         const { name, lastname, email, password, birthDay } = req.body;
         const user = new User(name, lastname, email, password, birthDay);
         const result = await this.userRepository.add(user);
-        res.send({
-            result: result
-        });
+        return result
     }
 
     deleteUser = async(req, res) => {

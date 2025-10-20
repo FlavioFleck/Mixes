@@ -8,15 +8,33 @@ export default class ProfileController {
 
     createProfile = async (req, res) => {
         const { userId, username, bio, profileImage} = req.body
-        const profile = new Profile(userId, username, bio, profileImage, Date.now())
-        const [info] = await this.profileRepository.add(profile)
+        const profile = new Profile(userId, username, bio, profileImage)
+        const result = await this.profileRepository.add(profile)
 
-        return info.insertId
+        res.send({result: result})
     }
 
     deleteProfile = async (req, res) => {
         const { id } = req.params
-        const [info] = await this.profileRepository.delete(id)
-        return info.insertId
+        const result= await this.profileRepository.delete(id)
+        res.send({result: result})
+    }
+
+    updateProfile = async (req, res) => {
+        const { userId, username, bio, profileImage} = req.body
+        const profile = new Profile(userId, username, bio, profileImage)
+        const result = await this.profileRepository.update(profile)
+        res.send({result: result})
+    }
+
+    viewProfile = async (req, res) => {
+        const {id} = req.user
+        const result = await this.profileRepository.getById(id)
+        res.send({result: result})
+    }
+
+    viewProfiles = async (req, res) => {
+        const result = await this.profileRepository.getAll()
+        res.send({result: result})
     }
 }
