@@ -79,4 +79,10 @@ export default class UserRepository{
         const [info] = await this.connection.query(query, [id]);
         return info[0];
     }
+
+    async getByEmail(email) {
+        const query = `SELECT * FROM users WHERE email = ?`
+        const [info] = await this.connection.query(query, [email])
+        return info
+    }
 }

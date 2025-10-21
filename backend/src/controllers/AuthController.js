@@ -1,14 +1,17 @@
-import UserController from "./UserController.js"
+import UserService from "../services/UserService.js"
 import { connection } from "../connection.js"
-const userController = new UserController(connection)
+const userService = new UserService(connection)
 
 export default class AuthController {
     register = async (req, res) => {
         try {
-            const user = await userController.createUser(req, res);
-            return res.status(200).send({ message: "Registrado com sucesso!", user});
+            const payload = {
+                ...req.body
+            }
+            await userService.createUser(payload);
+            res.status(200).send({ message: "Registrado com sucesso!"});
         } catch (err) {
-            return res.status(403).send({ message: "Falha no registro", error: err });
+            res.status(400).send({ message: "Falha no registro", error: err.message});
         }
     }
 
