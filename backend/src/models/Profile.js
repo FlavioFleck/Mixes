@@ -1,9 +1,8 @@
 export default class Profile {
-    constructor(userId, username, bio, profileImage, createdAt) {
+    constructor(userId, username, bio, profileImage) {
         this.userId = userId
-        this.userName = username
+        this.username = username
         this.bio = bio
         this.profileImage = profileImage
-        this.createdAt = createdAt
     }
 }

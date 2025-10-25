@@ -6,13 +6,6 @@ export default class UserController{
         this.userRepository = new UserRepository(connection);
     }
 
-    createUser = async(req, res) => {
-        const { name, lastname, email, password, birthDay } = req.body;
-        const user = new User(name, lastname, email, password, birthDay);
-        const result = await this.userRepository.add(user);
-        return result
-    }
-
     deleteUser = async(req, res) => {
         const {id} = req.params;
         const result = await this.userRepository.delete(id);
