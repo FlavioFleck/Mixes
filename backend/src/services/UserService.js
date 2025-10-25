@@ -19,28 +19,4 @@ export default class UserService {
         const result = await this.userRepository.add(user);
         return result.insertId
     }
-
-    deleteUser = async(data) => {
-        const result = await this.userRepository.delete(data.id);
-        res.send({
-            result: result
-        });
-    }
-
-    updateUser = async (id, data) => {
-        const result = await this.userRepository.update(id, data);
-        res.send({
-            result: result
-        });
-    }
-
-    getAllUsers = async () => {
-        const result = await this.userRepository.getAll();
-        return result
-    }
-
-    getUserById = async (id) => {
-        const result = await this.userRepository.getById(id);
-        return result
-    }
 }
