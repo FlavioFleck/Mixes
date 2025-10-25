@@ -8,8 +8,8 @@ export default class UserService {
         this.userRepository = new UserRepository(connection);
     }
 
-    createUser = async(data) => {
-        const { name, lastname, email, password, birthDay } = data
+    createUser = async(payload) => {
+        const { name, lastname, email, password, birthDay } = payload
         const existingUser = await this.userRepository.getByEmail(email)
         if(existingUser.length > 0) {
             throw new Error("Usuário já existente!")
@@ -18,5 +18,11 @@ export default class UserService {
         const user = new User(name, lastname, email, password, birthDay);
         const result = await this.userRepository.add(user);
         return result.insertId
+    }
+
+    deleteUser = async(payload) => {
+        const {id} = payload;
+        const result = await this.userRepository.delete(id);
+        return result.affectedRows;
     }
 }

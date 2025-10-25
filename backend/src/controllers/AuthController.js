@@ -26,7 +26,7 @@ export default class AuthController {
                 ...req.body
             }
 
-            await profileService.createProfile()
+            await profileService.createProfile(payload)
             res.status(200).send({ message: "Perfil criado com sucesso!"});
         } catch (err) {
             res.status(400).send({ message: "Falha no registro", error: err.message});

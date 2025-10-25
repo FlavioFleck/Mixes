@@ -1,16 +1,21 @@
 import User from "../models/User.js";
 import UserRepository from "../repositories/UserRepository.js";
+import ProfileService from "../services/ProfileService.js";
+import {connection} from "../connection.js"
+import UserService from "../services/UserService.js";
+
+const userService = new UserService(connection);
+const profileService = new ProfileService(connection);
 
 export default class UserController{
-    constructor(connection){
-        this.userRepository = new UserRepository(connection);
-    }
-
+ 
     deleteUser = async(req, res) => {
         const {id} = req.params;
-        const result = await this.userRepository.delete(id);
+        const resultProfile = await profileService.deleteProfile({id})        
+        const resultUser = await userService.deleteUser({id});
         res.send({
-            result: result
+            result: resultUser,
+            result: resultProfile
         });
     }
 

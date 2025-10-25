@@ -4,15 +4,14 @@ export default class ProfileRepository {
     }
 
     async add(profile) {
-        const query = `INSERT INTO profile (username, bio, profile_image, user_id, created_at) 
-                            VALUES (?, ?, ?, ?, ?);
+        const query = `INSERT INTO profile (username, bio, profile_image, user_id) 
+                            VALUES (?, ?, ?, ?);
                         `
         const [info] = await this.connection.query(query, [
             profile.username,
             profile.bio,
             profile.image,
-            profile.userId,
-            profile.createdAt
+            profile.userId
         ])
         return info.insertId
     }
