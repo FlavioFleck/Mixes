@@ -13,9 +13,9 @@ export default class ProfileService {
         return result.insertId
     }
 
-    deleteProfile = async (payload) => {
-        const {id} = payload;
-        const result = await this.profileRespository.delete(id);
+    deleteProfileByUserId = async (payload) => {
+        const { id } = payload;
+        const result = await this.profileRespository.deleteByUserId(id);
         return result.affectedRows;
     }
 }

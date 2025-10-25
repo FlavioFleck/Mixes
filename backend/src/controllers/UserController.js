@@ -11,11 +11,16 @@ export default class UserController{
  
     deleteUser = async(req, res) => {
         const {id} = req.params;
-        const resultProfile = await profileService.deleteProfile({id})        
+
+        //Deleta o perfil associado ao usuário
+        const resultProfile = await profileService.deleteProfileByUserId({id})    
+        
+        //Deleta o usuário
         const resultUser = await userService.deleteUser({id});
+
         res.send({
-            result: resultUser,
-            result: resultProfile
+            userDeleted: resultUser,
+            profileDeleted: resultProfile
         });
     }
 

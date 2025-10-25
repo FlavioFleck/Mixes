@@ -4,7 +4,7 @@ export default class ProfileRepository {
     }
 
     async add(profile) {
-        const query = `INSERT INTO profile (username, bio, profile_image, user_id) 
+        const query = `INSERT INTO profiles (username, bio, profile_image, user_id) 
                             VALUES (?, ?, ?, ?);
                         `
         const [info] = await this.connection.query(query, [
@@ -16,10 +16,10 @@ export default class ProfileRepository {
         return info.insertId
     }
 
-    async delete(id) {
+    async deleteByUserId(id) {
         const query = `
-            DELETE FROM profile 
-                WHERE id = ?;
+            DELETE FROM profiles
+                WHERE user_id = ?;
         `
         const [info] = await this.connection.query(query, [id])
         return info.insertId
