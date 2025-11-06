@@ -33,7 +33,7 @@ export default class AuthController {
         }
         
     }
-
+ 
     login = async (req, res) => {
 
     }
