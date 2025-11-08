@@ -1,11 +1,12 @@
 import UserService from "../services/UserService.js"
 import ProfileService from "../services/ProfileService.js";
-import { connection } from "../connection.js"
-
-const userService = new UserService(connection)
-const profileService = new ProfileService(connection);
 
 export default class AuthController {
+    constructor(connection) {
+        this.userService = new UserService(connection)
+        this.profileService = new ProfileService(connection)
+    }
+
     register = async (req, res) => {
         try {
             const payload = {
