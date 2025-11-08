@@ -1,7 +1,6 @@
 export default class Follow {
-    constructor(followingUserId, followedUserId, createdAt) {
+    constructor({followingUserId, followedUserId}) {
         this.followingUserId = followingUserId
         this.followedUserId = followedUserId
-        this.createdAt = createdAt 
     }
 }

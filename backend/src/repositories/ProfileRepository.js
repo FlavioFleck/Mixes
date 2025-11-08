@@ -3,20 +3,20 @@ export default class ProfileRepository {
         this.connection = connection
     }
 
-    async add(profile) {
+    async add({username, bio, profileImage, userId}) {
         const query = `INSERT INTO profiles (username, bio, profile_image, user_id) 
                             VALUES (?, ?, ?, ?);
                         `
         const [info] = await this.connection.query(query, [
-            profile.username,
-            profile.bio,
-            profile.image,
-            profile.userId
+            username,
+            bio,
+            profileImage,
+            userId
         ])
         return info.insertId
     }
 
-    async deleteByUserId(id) {
+    async deleteByUserId({id}) {
         const query = `
             DELETE FROM profiles
                 WHERE user_id = ?;
@@ -25,13 +25,13 @@ export default class ProfileRepository {
         return info.insertId
     }
 
-    async update(profile) {
+    async update({username, bio, profileImage, userId}) {
         const query = ``
         const [info] = await this.connection.query(query, [
-            profile.userId,
-            profile.username,
-            profile.bio,
-            profile.profileImage
+            username,
+            bio,
+            profileImage,
+            userId
         ])
         return info.affectedRows
     }
@@ -42,7 +42,7 @@ export default class ProfileRepository {
         return info
     }
 
-    async getById(id) {
+    async getById({id}) {
         const query = `SELECT * FROM profiles WHERE id = ?`
         const [info] = await this.connection.query(query, [id])
         return info

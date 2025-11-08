@@ -1,7 +1,6 @@
 export default class Like {
-    constructor(userId, postId, createdAt) {
+    constructor({userId, postId}) {
         this.userId = userId
         this.postId = postId
-        this.createdAt = createdAt
     }
 }

@@ -7,15 +7,13 @@ export default class ProfileService {
     }
 
     createProfile = async (payload) => {
-        const { userId, username, bio, profileImage } = payload
-        const profile = new Profile(userId, username, bio, profileImage)
+        const profile = new Profile(payload)
         const result = this.profileRespository.add(profile)
-        return result.insertId
+        return result
     }
 
     deleteProfileByUserId = async (payload) => {
-        const { id } = payload;
-        const result = await this.profileRespository.deleteByUserId(id);
-        return result.affectedRows;
+        const result = await this.profileRespository.deleteByUserId(payload);
+        return result
     }
 }

@@ -3,23 +3,23 @@ export default class UserRepository{
         this.connection = connection;
     }
 
-    async add(user) {
+    async add({name, lastname, email, password, birthday}) {
         const query = `
             INSERT INTO users(name, lastname, email, password, birthday)
                 VALUES(?, ?, ?, MD5(?), ?);
         `
 
         const [info] = await this.connection.query(query, [
-            user.name,
-            user.lastname,
-            user.email,
-            user.password,
-            user.birthday
+            name,
+            lastname,
+            email,
+            password,
+            birthday
         ]);
         return info.insertId;
     }
 
-    async delete(id) {
+    async delete({id}) {
         const query = `
             DELETE FROM users
                 WHERE id = ?;
@@ -29,7 +29,7 @@ export default class UserRepository{
         return info.affectedRows;
     }
 
-    async update(id, data) {
+    async update({id, name, lastname, email, password, birthday}) {
         const query = `
             UPDATE users
                 SET name = ?,
@@ -41,11 +41,11 @@ export default class UserRepository{
         `
 
         const [info] = await this.connection.query(query, [
-            data.name,
-            data.lastname,
-            data.email,
-            data.password,
-            data.birthDay,
+            name,
+            lastname,
+            email,
+            password,
+            birthday,
             id
         ]);
         return info.affectedRows;
@@ -80,7 +80,7 @@ export default class UserRepository{
         return info[0];
     }
 
-    async getByEmail(email) {
+    async getByEmail({email}) {
         const query = `SELECT * FROM users WHERE email = ?`
         const [info] = this.connection.query(query, [email])
         return info
