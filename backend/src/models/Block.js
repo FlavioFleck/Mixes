@@ -1,7 +1,6 @@
 export default class Block {
-    constructor(blockerUserId, blockedUserId, createdAt) {
+    constructor(blockerUserId, blockedUserId) {
         this.blockerUserId = blockerUserId
         this.blockedUserId = blockedUserId
-        this.createdAt = createdAt
     }
 }
