@@ -1,40 +1,45 @@
-import Profile from "../models/Profile.js"
-import ProfileRepository from "../repositories/ProfileRepository.js"
+import ProfileService from "../services/ProfileService.js"
 
 export default class ProfileController {
     constructor(connection) {
-        this.profileRepository = new ProfileRepository(connection)
+        this.profileService = new ProfileService(connection)
     }
 
     createProfile = async (req, res) => {
-        const { userId, username, bio, profileImage} = req.body
-        const profile = new Profile(userId, username, bio, profileImage)
-        const result = await this.profileRepository.add(profile)
+        const payload = {
+            ...req.body
+        }
+        const result = await this.profileService.createProfile(payload)
 
         res.send({result: result})
     }
 
     deleteProfile = async (req, res) => {
-        const { id } = req.params
-        const result= await this.profileRepository.delete(id)
+        const payload ={
+            ...req.params
+        }
+        const result= await this.profileService.deleteProfile(payload)
         res.send({result: result})
     }
 
     updateProfile = async (req, res) => {
-        const { userId, username, bio, profileImage} = req.body
-        const profile = new Profile(userId, username, bio, profileImage)
-        const result = await this.profileRepository.update(profile)
+        const payload = {
+            ...req.body
+        }
+        const result = await this.profileRepository.updateProfile(payload)
         res.send({result: result})
     }
 
     viewProfile = async (req, res) => {
-        const {id} = req.user
-        const result = await this.profileRepository.getById(id)
+        const payload = {
+            ...req.params
+        }
+        const result = await this.profileService.getProfileById(payload)
         res.send({result: result})
     }
 
     viewProfiles = async (req, res) => {
-        const result = await this.profileRepository.getAll()
+        const result = await this.profileService.getAll()
         res.send({result: result})
     }
 }
