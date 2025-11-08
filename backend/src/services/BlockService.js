@@ -13,7 +13,7 @@ export default class BlockService {
     }
 
     async deleteBlock(payload) {
-        const result = this.blockReporitory.delete(payload)
+        const result = await this.blockReporitory.delete(payload)
         return result
     }
 }

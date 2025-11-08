@@ -8,7 +8,7 @@ export default class ProfileService {
 
     createProfile = async (payload) => {
         const profile = new Profile(payload)
-        const result = this.profileRespository.add(profile)
+        const result = await this.profileRespository.add(profile)
         return result
     }
 
