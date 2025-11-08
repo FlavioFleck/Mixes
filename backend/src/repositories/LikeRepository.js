@@ -3,18 +3,18 @@ export default class LikeRepository {
         this.connection = connection
     }
 
-    add({userId, postId}) {
+    async add({userId, postId}) {
         const query = "INSERT INTO likes(user_id, post_id) VALUES (?, ?)" 
-        const [info] = this.connection.query(query, [
+        const [info] = await this.connection.query(query, [
             userId,
             postId
         ])
         return info.insertId
     }
 
-    delete({id}) {
+    async delete({id}) {
         const query = "DELETE FROM likes WHERE id = ?"
-        const [info] = this.connection.query(query, [id])
+        const [info] = await this.connection.query(query, [id])
         return info.affectedRows
     }
 }
