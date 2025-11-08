@@ -6,13 +6,13 @@ export default class ProfileService {
         this.profileRespository = new ProfileRepository(connection)
     }
 
-    createProfile = async (payload) => {
+    async createProfile(payload) {
         const profile = new Profile(payload)
         const result = await this.profileRespository.add(profile)
         return result
     }
 
-    deleteProfileByUserId = async (payload) => {
+    async deleteProfileByUserId(payload) {
         const result = await this.profileRespository.deleteByUserId(payload);
         return result
     }

@@ -16,8 +16,20 @@ export default class PostRepository {
     }
 
     async delete({id}) {
-        const query = "DELETE FROM post WHERE id = ?"
+        const query = "DELETE FROM posts WHERE id = ?"
         const [info] = await this.connection.query(query, [id])
         return info.affectedRows
+    }
+
+    async getAll() {
+        const query = "SELECT * FROM posts"
+        const [info] = await this.connection.query(query)
+        return info
+    }
+
+    async getById({id}) {
+        const query = "SELECT * FROM posts WHERE id ?"
+        const [info] = await this.connection.query(query, [id])
+        return info[0]
     }
 }

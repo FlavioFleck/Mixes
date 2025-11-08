@@ -16,4 +16,14 @@ export default class PostService {
         const result = await this.postRepository.delete(payload)
         return result
     }
+
+    async getAllPosts() {
+        const result = await this.postRepository.getAll()
+        return result
+    }
+
+    async getPostById(payload) {
+        const result = await this.postRepository.getById(payload)
+        return result
+    }
 }
