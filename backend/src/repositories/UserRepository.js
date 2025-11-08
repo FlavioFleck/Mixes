@@ -6,7 +6,7 @@ export default class UserRepository{
     async add({name, lastname, email, password, birthday}) {
         const query = `
             INSERT INTO users(name, lastname, email, password, birthday)
-                VALUES(?, ?, ?, MD5(?), ?);
+                VALUES(?, ?, ?, ?, ?);
         `
 
         const [info] = await this.connection.query(query, [
@@ -65,7 +65,7 @@ export default class UserRepository{
         return info;
     }
 
-    async getById(id) {
+    async getById({id}) {
         const query = `
             SELECT  name,
                     lastname, 

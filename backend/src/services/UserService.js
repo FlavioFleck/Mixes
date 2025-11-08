@@ -7,15 +7,18 @@ export default class UserService {
     }
 
     createUser = async(payload) => {
-        const existingUser = await this.userRepository.getByEmail(payload)
-        if(existingUser.length > 0) {
-            throw new Error("Usuário já existente!")
+        
+        const existingUser = await this.userRepository.getByEmail(payload);
+        if(existingUser) {
+            throw new Error("Email já está em uso.")
         }
 
-        const user = new User(payload);
+        const {password} = payload; 
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const user  = new User({...payload, password: hashedPassword});
         const result = await this.userRepository.add(user);
-        return result
-    }
+        return result;
+    };
 
     deleteUser = async(payload) => {
         const result = await this.userRepository.delete(payload);
