@@ -16,4 +16,9 @@ export default class NotificationService {
         const result = await this.notificationRepository.delete(payload)
         return result
     }
+
+    async getNotificationsByUserId(payload) {
+        const result = await this.notificationRepository.getByUserId(payload)
+        return result
+    }
 }

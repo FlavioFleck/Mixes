@@ -27,4 +27,10 @@ export default class NotificationRepository {
         const [info] = await this.connection.query(query, [id])
         return info.affectedRows
     }
+
+    async getByUserId({userId}) {
+        const query = "SELECT * FROM notifications WHERE receiver_user_id = ?"
+        const [info] = await this.connection.query(query, [userId])
+        return info
+    }
 }
