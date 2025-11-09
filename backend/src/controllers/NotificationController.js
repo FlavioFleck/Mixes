@@ -5,8 +5,11 @@ export default class NotificationController {
         this.notificationService = new NotificationService(connection)
     }
 
-    ListAllNotifications = async (req, res) => {
-        const result = await this.notificationService.getAllNotifications()
+    ListAllNotificationsByUserId = async (req, res) => {
+        const payload = {
+            ...req.user
+        }
+        const result = await this.notificationService.getNotificationsByUserId(payload)
         res.send({result: result})
     }
 }
