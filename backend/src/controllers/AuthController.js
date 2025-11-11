@@ -8,17 +8,7 @@ export default class AuthController {
     }
 
     register = async (req, res) => {
-        try {
-            const payload = {
-                ...req.body
-            }
-            await userService.createUser(payload);
-            res.status(200).send({ message: "Usuário criado com sucesso!"});
-
-            
-        } catch (err) {
-            res.status(400).send({ message: "Falha no registro", error: err.message});
-        }
+ 
     }
 
     profile = async (req, res) => {
