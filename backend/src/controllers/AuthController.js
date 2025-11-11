@@ -7,6 +7,7 @@ export default class AuthController {
         this.profileService = new ProfileService(connection)
     }
 
+    //Register
     register = async (req, res) => {
         try {
             const {name, lastname, email, password, birthday} = req.body;
@@ -36,6 +37,7 @@ export default class AuthController {
         }
     };
 
+    //Login
     login = async (req, res) => {
         try {
             const { email, password } = req.body;
