@@ -22,14 +22,9 @@ export default class AuthController {
         } catch (err) {
             res.status(400).send({ message: "Falha no registro", error: err.message});
         }
-        
     }
  
     login = async (req, res) => {
-
-    }
-
-    logout = async (req, res) => {
 
     }
 }
