@@ -37,8 +37,27 @@ export default class AuthController {
     };
 
     login = async (req, res) => {
+        try {
+            const { email, password } = req.body;
 
-    }
+            const { token } = await this.authService.login(email, password);
+
+            return res.status(200).send({
+                message: "Login realizado com sucesso!",
+                token
+            });
+        } catch (error) {
+            if(error.message.includes("Usuário incorreto ou não encontrado") ||
+             error.message.includes("Senha incorreta")) {
+                return res.status(401).send({
+                    error: error.message
+                });
+            }
+            return res.status(500).send({
+                error: "Erro interno no servidor"
+            });
+        }
+    };
 
     profile = async (req, res) => {
         try {

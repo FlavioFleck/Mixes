@@ -39,7 +39,7 @@ export default class AuthService {
 
     login = async (email, password) =>{
         const user = await this.userRepository.getByEmail({ email });
-        if (!user) {
+        if (!user || user.length === 0) {
             throw new Error("Usuário incorreto ou não encontrado.");
         }
 
