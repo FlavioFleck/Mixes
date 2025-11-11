@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import bcrypt from "bcrypt";
 import UserRepository from "../repositories/UserRepository.js";
 
 export default class UserService {
