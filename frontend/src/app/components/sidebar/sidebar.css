@@ -1,0 +1,56 @@
+:host {
+    display: block;
+    height: 100%;
+    padding: 20px;
+}
+
+.sidebar-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.logo {
+    font-family: 'Lato', sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    padding: 10px 0px 0px 30px;
+    background: linear-gradient(90deg, #1daf9c, #6730d6 36%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    cursor: pointer;
+}
+
+.main-nav {
+    flex-grow: 1; /* empurra o "settings" para baixo */
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    color: #B3B3B3;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    transition: background-color 0.2s;
+}
+
+.nav-item:hover {
+    background-color: #252525;
+    color: #FFFFFF;
+}
+
+.nav-item.active {
+    color: #FFFFFF;
+    background-color: #282828;
+}
+
+.nav-item .material-icons-outlined {
+    margin-right: 15px;
+    font-size: 34px;
+}

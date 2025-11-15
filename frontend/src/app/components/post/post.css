@@ -1,0 +1,183 @@
+:host {
+    display: block;
+    background-color: #121212;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    border-top-width: 0;
+    position: relative;
+}
+
+:host::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    right: 0px;
+    height: 3px;
+    background: linear-gradient(90deg, #136F63, #592AB8);
+    border-radius: 6px 6px 0 0;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+
+/* foto de perfil no post */
+.user-profile-picture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #757575;
+    background-size: cover;
+    background-position: center; /* centraliza a imagem */
+    margin-right: 10px;
+    flex-shrink: 0;
+    border: 1px solid #444;
+}
+
+.user-info {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info .username {
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    width: fit-content;
+}
+
+.user-info .username:hover {
+    text-decoration: underline;
+}
+
+.user-info .handle {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.options-icon {
+    color: #777;
+    cursor: pointer;
+}
+
+.post-content {
+    padding: 0 25px 15px 15px;
+}
+
+.post-content p {
+    margin: 4px 0 8px 10px;
+    line-height: 1.2;
+    font-size: 1.1em;
+}
+
+.music-embed {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    border-radius: 4px;
+    padding: 10px;
+    flex-shrink: 0;
+}
+
+.music-embed img {
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    margin-right: 16px;
+}
+
+.music-info .music-title {
+    font-size: 1.2em;
+    display: block;
+    font-weight: 400;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.music-info .music-title:hover {
+    text-decoration: underline;
+}
+
+.music-info .music-artist {
+    font-size: 1rem;
+    color: #B3B3B3;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.music-info .music-artist:hover {
+    text-decoration: underline;
+    color: #fff;
+}
+
+.post-footer {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    border-top: 1px solid #333;
+}
+
+.footer-action {
+    display: flex;
+    align-items: center;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.footer-action .material-icons-outlined {
+    font-size: 20px;
+    margin-right: 5px;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.action-like:hover .material-icons-outlined {
+    color: #E11D48;
+}
+
+.action-comment:hover .material-icons-outlined {
+    color: #4e79ce;
+}
+
+/* estilos para o menu flutuante */
+.post-options-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 220px;
+    background: linear-gradient(90deg, #136F63, #592AB8);
+    border: 1px solid #333;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    z-index: 10; /* fica por cima */
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Jost', sans-serif;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-item:hover .menu-text {
+    text-decoration: underline;
+}
+
+.menu-item .material-icons-outlined {
+    margin-right: 10px;
+    font-size: 20px;
+    text-decoration: none;
+}

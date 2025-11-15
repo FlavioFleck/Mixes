@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-rightbar',
+  selector: 'app-overview',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './rightbar.component.html',
-  styleUrls: ['./rightbar.component.css']
+  templateUrl: './overview.html',
+  styleUrl: './overview.css',
 })
-export class RightbarComponent {}
+export class Overview {
+
+}

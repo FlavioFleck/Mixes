@@ -1,0 +1,48 @@
+<article class="post-card">
+  
+  <header class="post-header">
+    <div class="user-profile-picture" style="background-image: url('https://via.placeholder.com/40')"></div>
+
+    <div class="user-info">
+      <span class="username">Username</span>
+      <span class="handle">@username · 10 hours ago</span>
+    </div>
+    
+    <span class="material-icons-outlined options-icon" (click)="toggleMenu($event)">more_vert</span>
+  </header>
+
+  <div class="post-content">
+    <p>avisa que e aoty</p>
+    
+    <div class="music-embed">
+      <img src="assets/images/capa-album.jpg" alt="Album Art"> 
+      <div class="music-info">
+        <span class="music-title">It's Not That Deep</span>
+        <span class="music-artist">Demi Lovato</span>
+      </div>
+    </div>
+  </div>
+
+  <footer class="post-footer">
+    <div class="footer-action action-like">
+      <span class="material-icons-outlined">favorite_border</span>
+      <span>100k</span>
+    </div>
+    <div class="footer-action action-comment">
+      <span class="material-icons-outlined">mode_comment</span>
+      <span>220</span>
+    </div>
+  </footer>
+
+  <div *ngIf="isMenuOpen" class="post-options-menu">
+    <a href="#" class="menu-item">
+      <span class="material-icons-outlined">block</span>
+      <span class="menu-text">Block @username</span>
+    </a>
+    <a href="#" class="menu-item">
+      <span class="material-icons-outlined">person_add_alt</span>
+      <span class="menu-text">Follow @username</span>
+    </a>
+  </div>
+
+</article>
