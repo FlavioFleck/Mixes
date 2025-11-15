@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -10,5 +11,19 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './sidebar.css',
 })
 export class Sidebar {
+
+  constructor(private router: Router) {}
+
+  menuOpen = false;
+  userName: string | null = null;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  login() {
+    this.menuOpen = false;
+    this.router.navigate(['/auth/login']);
+  }
   
 }

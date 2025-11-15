@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { Login } from './pages/auth/login/login';
 import { Layout } from './layout/layout';
 import { Feed } from './pages/feed/feed';
 import { Profile } from './pages/profile/profile';
@@ -7,12 +8,13 @@ import { Posts } from './pages/profile/posts/posts';
 import { Followers } from './pages/profile/followers/followers';
 
 export const routes: Routes = [
-  
+  { path: 'auth/login', component: Login },
+
   // rota "pai"
   { path: '', component: Layout, children: [
       
       // rota principal "localhost:4200/", carrega o feed
-      { path: '', component: Feed }, 
+      { path: '', component: Feed },
       
       // rota perfil "localhost:4200/profile"
       { path: 'profile', component: Profile,

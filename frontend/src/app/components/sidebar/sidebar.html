@@ -16,12 +16,20 @@
       <span class="material-icons-outlined">notifications_none</span>
       Notification
     </a>
-  </nav>
-
-  <div class="settings">
     <a href="#" class="nav-item">
       <span class="material-icons-outlined">settings</span>
       Settings
     </a>
+  </nav>
+
+  <div class="user_options" (click)="toggleMenu()">
+    <a href="#" class="nav-item">
+      <span class="material-icons-outlined">person_outline</span>
+      {{userName || 'Entrar'}}
+    </a>
+
+  <div class="user-menu" *ngIf="menuOpen" (click)="$event.stopPropagation()">
+    <button class="menu-item" (click)="login(); $event.stopPropagation()">Fazer login</button>
+  </div>
   </div>
 </div>
