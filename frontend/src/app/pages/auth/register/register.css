@@ -1,0 +1,141 @@
+:host {
+  display: block;
+  height: 100vh;
+}
+
+.auth-background {
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/fundo-auth.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.register-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* ---------------------------
+   PAINEL ESQUERDO
+----------------------------*/
+.left-panel {
+  width: 35%;   /* menor, como você pediu */
+  background: #0f0f0f;
+  padding: 50px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+}
+
+.back-btn {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  background: transparent;
+  color: #fff;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.back-btn:hover {
+  opacity: 0.7;
+}
+
+.title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 40px;
+}
+
+.register-form {
+  width: 75%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-form input {
+  padding: 14px 20px;
+  border-radius: 30px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.register-form input:focus {
+  border-color: #ff7a00;
+  box-shadow: #b400ff;
+  background: #141414;
+}
+
+.signup-btn {
+  margin-top: 10px;
+  border-radius: 30px;
+  padding: 14px;
+  font-weight: bold;
+  border: 2px solid transparent;
+  background: linear-gradient(#111, #111) padding-box,
+              linear-gradient(to right, #ff7a00, #b400ff) border-box;
+  color: white;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.signup-btn:hover {
+  background: linear-gradient(#181818, #181818) padding-box,
+              linear-gradient(to right, #ff8f2a, #d000ff) border-box;
+  transform: translateY(-2px);
+  box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.login-text a {
+  margin-left: 6px;
+  color: #b400ff;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.login-text a:hover {
+  color: #d380ff;
+}
+
+.logo { 
+  font-family: 'Lato', sans-serif;
+  margin-top: 0px;
+  text-align: center;
+  font-size: 28px;
+  background: linear-gradient(to right, #00f7c1, #b400ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ---------------------------
+   PAINEL DIREITO
+----------------------------*/
+.right-panel {
+  width: 65%;
+  background-image: url('/assets/images/fundo-auth.png'); 
+  background-size: cover;
+  background-position: 1300px 0px;   /* puxado mais para a esquerda */
+  background-repeat: no-repeat;
+}

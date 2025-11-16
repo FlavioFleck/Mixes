@@ -6,9 +6,12 @@ import { Profile } from './pages/profile/profile';
 import { Overview } from './pages/profile/overview/overview';
 import { Posts } from './pages/profile/posts/posts';
 import { Followers } from './pages/profile/followers/followers';
+import { Register } from './pages/auth/register/register';
 
 export const routes: Routes = [
   { path: 'auth/login', component: Login },
+
+  { path: 'auth/register', component: Register },
 
   // rota "pai"
   { path: '', component: Layout, children: [
