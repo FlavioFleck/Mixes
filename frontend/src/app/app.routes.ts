@@ -7,11 +7,12 @@ import { Overview } from './pages/profile/overview/overview';
 import { Posts } from './pages/profile/posts/posts';
 import { Followers } from './pages/profile/followers/followers';
 import { Register } from './pages/auth/register/register';
+import { CreateProfile } from './pages/auth/create-profile/create-profile';
 
 export const routes: Routes = [
   { path: 'auth/login', component: Login },
-
   { path: 'auth/register', component: Register },
+  { path: 'auth/profile', component: CreateProfile },
 
   // rota "pai"
   { path: '', component: Layout, children: [

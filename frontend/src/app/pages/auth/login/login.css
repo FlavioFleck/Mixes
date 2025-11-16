@@ -156,9 +156,7 @@
   color: transparent;
 }
 
-/* ---------------------------
-   PAINEL DIREITO
-----------------------------*/
+/* PAINEL DIREITO */
 .right-panel {
   width: 65%;
   background-image: url('/assets/images/fundo-auth.png'); 
