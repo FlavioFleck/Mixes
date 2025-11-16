@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { CommonModule } from '@angular/common'; // *ngIf
 
 @Component({
@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common'; // *ngIf
   styleUrl: './post.css'
 })
 export class Post {
-
+  @Input() data: any
   public isMenuOpen = false;
 
   
