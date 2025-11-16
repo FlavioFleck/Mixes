@@ -150,9 +150,10 @@
   margin-top: 20px;
   text-align: center;
   font-size: 28px;
-  background: linear-gradient(to right, #00f7c1, #b400ff);
+  background: linear-gradient(90deg, #1daf9c, #6730d6 72%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ---------------------------
