@@ -53,3 +53,16 @@
     border-left: 1px solid #333;
     background-color: #1A1A1A;
 }
+
+/* ajustando rightbar no /profile */
+.layout-rightbar {
+  transition: all 0.25s ease;
+  overflow-y: auto;
+  height: 100%;
+}
+
+/* quando estiver em /profile -> desce o rightbar */
+.profile-route .layout-rightbar {
+  margin-top: 180px; /* deixa o rightbar p baixo */
+  height: calc(100% - 180px); /* ajusta conforme a tela */
+}
