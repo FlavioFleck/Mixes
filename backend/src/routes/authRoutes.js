@@ -14,8 +14,4 @@ router.post("/profile", authController.profile)
 //Login do usuário
 router.post("/login", authController.login)
 
-//Logout do usuário
-router.post("/logout", authController.logout)
-
-
 export default router
