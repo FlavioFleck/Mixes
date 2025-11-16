@@ -1,11 +1,10 @@
 <!-- caixa "what's new?" -->
-<div class="new-post-box">
+<form class="new-post-box" (ngSubmit)="createPost()">
   <div class="user-profile-picture-small" style="background-image: url('https://via.placeholder.com/36')"></div>
-  <input type="text" placeholder="What's new?" />
-  <button class="post-button">Post</button>
-</div>
+  <input [(ngModel)]="post.content" name="content" type="text" placeholder="What's new?"/>
+  <button class="post-button" type="submit">Post</button>
+</form>
 
-<!-- posts mockados -->
-<app-post></app-post>
-<app-post></app-post>
-<app-post></app-post>
+<app-post *ngFor="let p of posts" [data]="p">> </app-post>
+<!-- <app-post></app-post>
+<app-post></app-post> -->

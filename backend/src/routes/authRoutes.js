@@ -13,5 +13,4 @@ router.post("/profile", authController.profile)
 
 //Login do usuário
 router.post("/login", authController.login)
-
 export default router
