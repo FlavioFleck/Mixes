@@ -1,0 +1,26 @@
+{
+  "name": "mixes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:frontend": "cd frontend && ng serve",
+    "start:backend": "cd backend && npm start",
+    "start:all": "concurrently \"npm run start:backend\" \"npm run start:frontend\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlavioFleck/Mixes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/FlavioFleck/Mixes/issues"
+  },
+  "homepage": "https://github.com/FlavioFleck/Mixes#readme",
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
