@@ -181,3 +181,11 @@
     font-size: 20px;
     text-decoration: none;
 }
+
+.like::before {
+    content: "favorite_border";
+}
+
+input#like:checked + .like::before {
+    content: "favorite";
+}
