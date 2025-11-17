@@ -6,12 +6,20 @@ import { Injectable } from '@angular/core';
 })
 
 export class PostService {
-  private API_URL = 'http://localhost:5010/post'
+  private API_POST_URL = 'http://localhost:5010/post'
+  private API_LIKE_URL = 'http://localhost:5010/like'
 
   constructor(private http: HttpClient) {}
 
+  like(like: any) {
+    return this.http.post(`${this.API_LIKE_URL}/create`, like)
+  }
 
   createPost(product: any) {
-    return this.http.post(`${this.API_URL}/create`, product)
+    return this.http.post(`${this.API_POST_URL}/create`, product)
+  }
+
+  getPostId() {
+    return this.http.get(`${this.API_POST_URL}/get`)
   }
 }

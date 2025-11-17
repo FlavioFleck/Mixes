@@ -186,6 +186,14 @@
     content: "favorite_border";
 }
 
+input#like {
+    display: none;
+}
+
+input#like:checked + .like {
+    color: #E11D48
+}
+
 input#like:checked + .like::before {
     content: "favorite";
 }

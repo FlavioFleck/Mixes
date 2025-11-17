@@ -13,4 +13,13 @@ export default class PostController {
         // const result = await this.postService.getNotificationsByUserId(payload)
         res.send(payload)
     }
+
+    getPostById = async(req, res) => {
+        const payload= {
+            ...req.params
+        }
+
+        const result = await this.postService.getPostById(payload)
+        res.send(result)
+    }
 }
