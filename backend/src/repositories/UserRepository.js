@@ -3,15 +3,15 @@ export default class UserRepository{
         this.connection = connection;
     }
 
-    async add({name, lastname, email, password, birthday}) {
+    async add({name, cpf, email, password, birthday}) {
         const query = `
-            INSERT INTO users(name, lastname, email, password, birthday)
+            INSERT INTO users(name, cpf, email, password, birthday)
                 VALUES(?, ?, ?, ?, ?);
         `
 
         const [info] = await this.connection.query(query, [
             name,
-            lastname,
+            cpf,
             email,
             password,
             birthday
@@ -29,11 +29,11 @@ export default class UserRepository{
         return info.affectedRows;
     }
 
-    async update({id, name, lastname, email, password, birthday}) {
+    async update({id, name, cpf, email, password, birthday}) {
         const query = `
             UPDATE users
                 SET name = ?,
-                    lastname = ?,
+                    cpf = ?,
                     email = ?,
                     password = ?,
                     birthday = ?
@@ -42,7 +42,7 @@ export default class UserRepository{
 
         const [info] = await this.connection.query(query, [
             name,
-            lastname,
+            cpf,
             email,
             password,
             birthday,
@@ -54,7 +54,7 @@ export default class UserRepository{
     async getAll() {
         const query = `
             SELECT  name,
-                    lastname,
+                    cpf,
                     email,
                     birthday,
                     created_at
@@ -68,7 +68,7 @@ export default class UserRepository{
     async getById({id}) {
         const query = `
             SELECT  name,
-                    lastname, 
+                    cpf, 
                     email,
                     birthday,
                     created_at
