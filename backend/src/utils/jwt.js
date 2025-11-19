@@ -10,7 +10,7 @@ export function generateToken(user) {
         sub: String(user.id),    
         email: user.email,
         name: user.name,
-        lastname: user.lastname,
+        cpf: user.cpf,
         birthday: user.birthday
     };  
 

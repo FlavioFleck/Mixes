@@ -9,7 +9,7 @@ export default class AuthService {
     }
     
     register = async (payload) => {
-        const {name, lastname, email, password, birthday} = payload;
+        const {name, cpf, email, password, birthday} = payload;
         const existingUser = await this.userRepository.getByEmail({ email });
         if (existingUser) {
             throw new Error("Email já está em uso");
@@ -19,7 +19,7 @@ export default class AuthService {
 
         const user = new User ({
             name,
-            lastname,
+            cpf,
             email,
             password: hashedPassword,
             birthday
@@ -29,7 +29,7 @@ export default class AuthService {
         const token = generateToken({
             id: insertId,
             name,
-            lastname,
+            cpf,
             email,
             birthday
         });
@@ -52,7 +52,7 @@ export default class AuthService {
             id: user.id,
             email: user.email,
             name: user.name,
-            lastname: user.lastname
+            cpf: user.cpf
         });
 
         return { token };

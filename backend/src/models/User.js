@@ -1,7 +1,7 @@
 export default class User{
-    constructor({name, lastname, email, password, birthday}) {
+    constructor({name, cpf, email, password, birthday}) {
         this.name = name
-        this.lastname = lastname
+        this.cpf = cpf
         this.email = email
         this.password = password
         this.birthday = birthday

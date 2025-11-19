@@ -10,11 +10,11 @@ export default class AuthController {
     //Register
     register = async (req, res) => {
         try {
-            const {name, lastname, email, password, birthday} = req.body;
+            const {name, cpf, email, password, birthday} = req.body;
 
             const { id, token } = await this.authService.register({
                 name,
-                lastname,
+                cpf,
                 email,
                 password,
                 birthday
