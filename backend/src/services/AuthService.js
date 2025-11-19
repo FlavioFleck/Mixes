@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import { validateCPF } from "../utils/validateCpf.js";
 import { generateToken } from "../utils/jwt.js";
 import bcrypt from "bcrypt";
 import UserRepository from "../repositories/UserRepository.js";
@@ -10,6 +11,11 @@ export default class AuthService {
     
     register = async (payload) => {
         const {name, cpf, email, password, birthday} = payload;
+        
+        if(!validateCPF(cpf)) {
+            throw new Error("CPF inválido.")
+        }
+
         const existingUser = await this.userRepository.getByEmail({ email });
         if (existingUser) {
             throw new Error("Email já está em uso");
