@@ -14,12 +14,14 @@ import { Rightbar } from '../components/rightbar/rightbar';
   styleUrl: './layout.css'
 })
 export class Layout {
-  
-  isProfileRoute = false;  // identificar se está em /profile
+
+  isProfileRoute = false;  // Flag para identificar se está em /profile
 
   constructor(private router: Router) {
+    // Escutando as mudanças de rota
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        // Verificando se a URL contém "/profile"
         this.isProfileRoute = event.urlAfterRedirects.startsWith('/profile');
       }
     });

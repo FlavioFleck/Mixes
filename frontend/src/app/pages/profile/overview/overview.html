@@ -1,0 +1,35 @@
+<div class="overview-container">
+
+  <!-- recent tracks -->
+  <h2 class="section-title">Recent Tracks</h2>
+
+  <div class="songs-list">
+
+    <!-- item -->
+    <div class="song-item" *ngFor="let s of songs">
+      <div class="song-left">
+        <div class="song-cover"></div>
+
+        <div class="song-info">
+          <span class="song-name">Song Name</span>
+          <span class="artist-name">Artist Name</span>
+        </div>
+      </div>
+
+      <span class="song-time">4 minutes ago</span>
+    </div>
+
+  </div>
+
+  <!-- top artists -->
+  <h2 class="section-title">Top artists</h2>
+
+  <!-- .slice limita a 5 artistas -->
+  <div class="artists-grid">
+    <div class="artist-card" *ngFor="let a of topArtists.slice(0,5); let i = index" [class.big]="i === 0">
+      <img [src]="a.img" alt="">
+  
+    </div>
+  </div>
+
+</div>

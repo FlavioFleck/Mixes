@@ -7,6 +7,6 @@ const postController = new PostController(connection)
 
 //Criação do usuário
 router.post("/create", postController.createPost)
-rotuter.get("/get", postController.getPostById)
+router.get("/get", postController.getPostById)
 
 export default router
