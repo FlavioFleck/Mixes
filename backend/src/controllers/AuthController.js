@@ -30,6 +30,11 @@ export default class AuthController {
                     error: error.message
                 });
             }
+            if(error.message.includes("CPF inválido")) {
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
             console.error(error);
             return res.status(500).send({
                 error: "Erro interno no servidor."
@@ -67,7 +72,7 @@ export default class AuthController {
                 ...req.body
             }
 
-            await profileService.createProfile(payload)
+            await this.profileService.createProfile(payload)
             res.status(200).send({ message: "Perfil criado com sucesso!"});
         } catch (err) {
             res.status(400).send({ message: "Falha no registro", error: err.message});
