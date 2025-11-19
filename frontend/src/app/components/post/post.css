@@ -74,6 +74,13 @@
     margin: 4px 0 8px 10px;
     line-height: 1.2;
     font-size: 1.1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* limita o conteúdo a 3 linhas */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden; /* esconde o conteúdo que ultrapassar o limite */
+    text-overflow: ellipsis;
+    word-break: break-word; /* sequencia de palavras longas quebrem dentro do conteiner */
 }
 
 .music-embed {
