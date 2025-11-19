@@ -3,6 +3,7 @@
     height: 100vh;
 }
 
+/* grid principal */
 .main-layout {
     display: grid;
     height: 100%;
@@ -52,17 +53,29 @@
     grid-area: rightbar;
     border-left: 1px solid #333;
     background-color: #1A1A1A;
+    transition: all 0.25s ease;
+    overflow-y: auto;
+    height: 100%;
 }
 
-/* ajustando rightbar no /profile */
-.layout-rightbar {
-  transition: all 0.25s ease;
-  overflow-y: auto;
-  height: 100%;
-}
-
+/* ajustes especiais para /profile */
 /* quando estiver em /profile -> desce o rightbar */
 .profile-route .layout-rightbar {
-  margin-top: 180px; /* deixa o rightbar p baixo */
-  height: calc(100% - 180px); /* ajusta conforme a tela */
+    margin-top: 180px; /* deixa o rightbar p baixo */
+    height: calc(100% - 180px); /* ajusta conforme a tela */
+    border-top: none !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* permite card de perfil invadir a header/sidebar */
+.profile-route .layout-content {
+    overflow: visible !important;
+    position: relative;
+    z-index: 2;
+}
+
+/* permite elementos da pagina ultrapassarem grid */
+.profile-route .main-layout {
+    overflow: visible !important;
 }

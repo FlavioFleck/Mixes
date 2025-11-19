@@ -1,1 +1,39 @@
-*profile works*
+<div class="profile-box">
+
+    <div class="left">
+        <div class="profile-picture"></div>
+
+        <div class="user-info">
+            <h2 class="username">Username</h2>
+            <p class="handle">@username</p>
+
+            <p class="bio">
+                i love ouçar musga
+            </p>
+
+            <nav class="tabs">
+                <a routerLink="overview" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true}">Overview</a>
+                <a routerLink="posts" routerLinkActive="active">Posts</a>
+                <a routerLink="followers" routerLinkActive="active">Followers</a>
+                <a routerLink="following" routerLinkActive="active">Following</a>
+            </nav>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="track-box">
+
+        <div class="track-text">
+            <span class="label">TOP TRACK</span>
+            <h3 class="track-title">Runaway</h3>
+            <span class="track-artist">Linkin Park</span>
+        </div>
+
+            <img class="track-cover" src="assets/images/main-track.jpg" alt="Imagem da faixa principal">
+        </div>
+        
+    </div>
+</div>
+
+<!-- aqui entram overview/posts/followers -->
+<router-outlet></router-outlet>

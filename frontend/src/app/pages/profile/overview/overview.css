@@ -1,0 +1,133 @@
+.overview-container {
+  width: 100%;
+  max-width: 100%; /* pega a overview por completo */
+  padding: 20px 10px;
+  color: #fff;
+  font-family: "Itim";
+  margin-top: 190px; /* espaçamento entre perfil e recent tracks */
+  max-height: calc(100vh - 270px);
+  overflow-y: auto;
+  padding-right: 10px; /* espaço pra barra */
+  scrollbar-width: thin;
+  scrollbar-color: #333 #121212;
+}
+
+/* barra no chrome */
+.overview-container::-webkit-scrollbar {
+  width: 10px;
+}
+.overview-container::-webkit-scrollbar-track {
+  background: #121212;
+}
+.overview-container::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 10px;
+  border: 2px solid #121212;
+}
+
+/* títulos */
+.section-title {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: 200;
+  margin-bottom: 15px;
+  margin-top: 40px;
+}
+
+.section-title:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* lista das musicas */
+.songs-list {
+  width: 100%;
+}
+
+.song-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid #333;
+}
+
+.song-left {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.song-name,
+.artist-name {
+  display: inline-block; /* só o texto vira área clicável */
+  white-space: nowrap;
+}
+
+/* underline só quando realmente passar no texto */
+.song-name:hover,
+.artist-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.song-cover {
+  width: 45px;
+  height: 45px;
+  background: #757575;
+  border-radius: 4px;
+}
+
+.song-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* deixa o artist name na mesma linha */
+}
+
+.song-name {
+  font-size: 16px;
+  font-weight: 200;
+  color: #fff;
+}
+
+.artist-name {
+  font-size: 14px;
+  color: #fff;
+  margin-right: 400px;
+  text-align: center;
+}
+
+.song-time {
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+/* estilizando cards do top artists */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 200px); /* tamanho dos cards */
+  gap: 0;
+  padding: 12px 30px 25px 30px; /* deixa o top mais fechado */
+}
+
+.artist-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.artist-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+}
+
+.artist-card.big {
+  grid-column: span 2; /* ocupa 2 colunas */
+  grid-row: span 2;
+}
