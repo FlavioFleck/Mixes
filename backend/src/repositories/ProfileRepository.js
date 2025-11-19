@@ -47,4 +47,13 @@ export default class ProfileRepository {
         const [info] = await this.connection.query(query, [id])
         return info
     }
+
+    async getProfileByUsername({username}) {
+        const query = `
+            SELECT * FROM profiles
+            WHERE username = ?
+        `
+        const [info] = await this.connection.query(query, [username]);
+        return info
+    }
 }

@@ -16,4 +16,6 @@ export default class ProfileService {
         const result = await this.profileRespository.deleteByUserId(payload);
         return result
     }
+
+    
 }
