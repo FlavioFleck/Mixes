@@ -9,7 +9,8 @@ export default class ProfileController {
         try {
             const payload = {
                 ...req.body,
-                userId: req.user.id
+                userId: req.user.id,
+                profileImage: req.file ? req.file.filename : null
             };
 
             const result = await this.profileService.createProfile(payload);

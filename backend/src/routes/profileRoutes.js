@@ -8,7 +8,7 @@ const router = express.Router()
 const upload = multer({ dest: "uploads/profile/" });
 const profileController = new ProfileController(connection)
 
-router.post("/profile/create", upload.single("photo"), authMiddleware, profileController.createProfile);
+router.post("/profile/create", upload.single("profileImage"), authMiddleware, profileController.createProfile);
 router.post("/delete", profileController.deleteProfile)
 router.get("/get", profileController.viewProfile)
 router.get("get/:id", profileController.viewProfiles)
