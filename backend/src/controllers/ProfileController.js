@@ -7,7 +7,8 @@ export default class ProfileController {
 
     createProfile = async (req, res) => {
         const payload = {
-            ...req.body
+            ...req.body,
+            userId: req.user.id
         }
         const result = await this.profileService.createProfile(payload)
 

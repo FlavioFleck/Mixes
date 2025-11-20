@@ -7,7 +7,7 @@ export default class ProfileService {
     }
 
     async createProfile(payload) {
-        existingUsername = await this.profileRespository.getProfileByUsername(payload);
+        existingUsername = await this.profileRespository.getByUsername({username: payload.username});
         if(existingUsername) {
             throw new Error("Nome de usuário já existente.");
         }
@@ -17,12 +17,12 @@ export default class ProfileService {
     }
 
     async deleteProfileByUserId(payload) {
-        const result = await this.profileRespository.deleteByUserId(payload);
+        const result = await this.profileRespository.delete(payload);
         return result
     }
 
     async getProfileByUsername(payload) {
-        const result = await this.profileRespository.getProfileByUsername(payload);
+        const result = await this.profileRespository.getByUsername(payload);
         return result;
     }
 
