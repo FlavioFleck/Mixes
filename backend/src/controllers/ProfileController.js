@@ -19,6 +19,7 @@ export default class ProfileController {
                 id: result
             });
         } catch (error) {
+            console.error(error);
             if(error.message.includes("Nome de usuário já existente")){
                 return res.status(400).send({
                     error: error.message
@@ -41,6 +42,7 @@ export default class ProfileController {
                 result: result
             });
         } catch (error) {
+            console.error(error);
             if(error.message.includes("Usuário não encontrado ou não existente")){
                 return res.status(400).send({
                     error: error.message
@@ -64,6 +66,7 @@ export default class ProfileController {
                 result: result
             });            
         } catch (error) {
+            console.error(error);
             if(error.message.includes("Falha ao atualizar dados")){
                 return res.status(400).send({
                     error: error.message
