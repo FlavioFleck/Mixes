@@ -6,13 +6,28 @@ export default class ProfileController {
     }
 
     createProfile = async (req, res) => {
-        const payload = {
-            ...req.body,
-            userId: req.user.id
-        }
-        const result = await this.profileService.createProfile(payload)
+        try {
+            const payload = {
+                ...req.body,
+                userId: req.user.id
+            };
 
-        res.send({result: result})
+            const result = await this.profileService.createProfile(payload);
+            return res.status(201).send({
+                message: "Perfil criado com sucesso!",
+                id: result
+            });
+        } catch (error) {
+            if(error.message.includes("Nome de usuário já existente")){
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
+            return res.status(500).send({
+                error: "Erro interno no servidor."
+            })
+
+        }
     }
 
     deleteProfile = async (req, res) => {

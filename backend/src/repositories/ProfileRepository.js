@@ -22,11 +22,17 @@ export default class ProfileRepository {
                 WHERE user_id = ?;
         `
         const [info] = await this.connection.query(query, [id])
-        return info.insertId
+        return info.affectedRows
     }
 
     async update({username, bio, profileImage, userId}) {
-        const query = ``
+        const query = `
+            UPDATE profiles
+                SET username = ?,
+                    bio = ?,
+                    profile_image = ?
+                WHERE user_id = ?
+        `
         const [info] = await this.connection.query(query, [
             username,
             bio,
@@ -42,10 +48,10 @@ export default class ProfileRepository {
         return info
     }
 
-    async getById({id}) {
-        const query = `SELECT * FROM profiles WHERE id = ?`
+    async getByUserId({id}) {
+        const query = `SELECT * FROM profiles WHERE user_id = ?`
         const [info] = await this.connection.query(query, [id])
-        return info
+        return info[0] || null;
     }
 
     async getByUsername({username}) {
@@ -54,6 +60,6 @@ export default class ProfileRepository {
             WHERE username = ?
         `
         const [info] = await this.connection.query(query, [username]);
-        return info
+        return info[0] || null;
     }
 }
