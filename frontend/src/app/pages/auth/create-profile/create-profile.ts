@@ -15,23 +15,27 @@ export class CreateProfile {
   username = '';
   bio = '';
   image: File | null = null;
+  imagePreview: string | null = null; 
 
-  constructor(private profileService: ProfileService, private router: Router){
-
-  }
+  constructor(private profileService: ProfileService, private router: Router) {}
 
   onFileChange(event: any) {
-    this.image = event.target.files[0];
+    const file = event.target.files[0];
+    if (file) {
+      this.image = file;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imagePreview = e.target.result;
+      reader.readAsDataURL(file);
+    }
   }
 
   createProfile() {
-    const userId = localStorage.getItem('userId');
-
     const formData = new FormData();
     formData.append('username', this.username);
     formData.append('bio', this.bio);
 
-    if(this.image){
+    if (this.image) {
       formData.append('profileImage', this.image);
     }
 
