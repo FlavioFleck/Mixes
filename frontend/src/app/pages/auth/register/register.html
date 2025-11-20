@@ -9,19 +9,19 @@
 
       <h1 class="title">SIGN UP</h1>
 
-      <form class="register-form">
+      <form class="register-form" (submit)="register(); $event.preventDefault()">
 
-        <input type="text" placeholder="Digite seu nome" />
+        <input type="text" placeholder="Digite seu nome" [(ngModel)]="name" name="name" />
 
-        <input type="text" placeholder="Digite seu CPF" mask="000.000.000-00"/>
+        <input type="text" placeholder="Digite seu CPF" mask="000.000.000-00" [(ngModel)]="cpf" name="cpf"/>
 
-        <input type="email" placeholder="Digite seu email" />
+        <input type="email" placeholder="Digite seu email" [(ngModel)]="email" name="email" />
 
-        <input type="password" placeholder="Digite sua senha" />
+        <input type="password" placeholder="Digite sua senha" [(ngModel)]="password" name="password"/>
 
-        <input type="text" placeholder="Digite sua data de nascimento" mask="00/00/0000">
+        <input type="text" placeholder="Digite sua data de nascimento" mask="00/00/0000" [(ngModel)]="birthday" name="birthday">
 
-        <button class="signup-btn">Sign Up</button>
+        <button type="button" class="signup-btn" (click)="register()">Sign Up</button>
 
         <p class="login-text">
           Já possui uma conta?
