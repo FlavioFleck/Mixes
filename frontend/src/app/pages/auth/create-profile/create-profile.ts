@@ -17,7 +17,7 @@ export class CreateProfile {
   image: File | null = null;
   imagePreview: string | null = null; 
 
-  constructor(private profileService: ProfileService, private router: Router) {}
+  constructor(private profileService: ProfileService, public router: Router) {}
 
   onFileChange(event: any) {
     const file = event.target.files[0];
