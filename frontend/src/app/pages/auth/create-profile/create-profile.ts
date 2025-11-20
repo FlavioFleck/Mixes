@@ -30,10 +30,9 @@ export class CreateProfile {
     const formData = new FormData();
     formData.append('username', this.username);
     formData.append('bio', this.bio);
-    formData.append('userId', userId || '');
 
     if(this.image){
-      formData.append('image', this.image);
+      formData.append('profileImage', this.image);
     }
 
     this.profileService.createProfile(formData).subscribe({

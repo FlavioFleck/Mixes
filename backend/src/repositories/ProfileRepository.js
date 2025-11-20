@@ -48,9 +48,9 @@ export default class ProfileRepository {
         return info
     }
 
-    async getByUserId({id}) {
+    async getByUserId({userId}) {
         const query = `SELECT * FROM profiles WHERE user_id = ?`
-        const [info] = await this.connection.query(query, [id])
+        const [info] = await this.connection.query(query, [userId])
         return info[0] || null;
     }
 

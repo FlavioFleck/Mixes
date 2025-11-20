@@ -5,10 +5,18 @@ import ProfileController from "../controllers/ProfileController.js"
 import authMiddleware from '../middlewares/authMiddleware.js'
 
 const router = express.Router()
-const upload = multer({ dest: "uploads/profile/" });
 const profileController = new ProfileController(connection)
 
-router.post("/profile/create", upload.single("profileImage"), authMiddleware, profileController.createProfile);
+const storage = multer.diskStorage({
+    destination: "uploads/profile/",
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + "-" + file.originalname);
+    }
+});
+
+const upload = multer({ storage });
+
+router.post("/profile/create", authMiddleware, upload.single("profileImage"), profileController.createProfile);
 router.post("/delete", profileController.deleteProfile)
 router.get("/get", profileController.viewProfile)
 router.get("get/:id", profileController.viewProfiles)

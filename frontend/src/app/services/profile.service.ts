@@ -9,7 +9,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
-  createProfile(data: any) {
+  createProfile(data: FormData) {
     return this.http.post(`${this.API_URL}/create`, data);
   }
 
