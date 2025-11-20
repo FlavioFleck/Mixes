@@ -16,7 +16,7 @@ export default class ProfileService {
         return result
     }
 
-    async deleteProfileByUserId(payload) {
+    async deleteProfile(payload) {
         const result = await this.profileRespository.delete(payload);
         if (!result) {
             throw new Error("Usuário não encontrado ou inexistente.")

@@ -31,11 +31,24 @@ export default class ProfileController {
     }
 
     deleteProfile = async (req, res) => {
-        const payload ={
-            ...req.params
+        try {
+            const payload ={
+                userId: req.user.id
+            }
+            const result= await this.profileService.deleteProfile(payload)
+            return res.status(200).send({
+                result: result
+            });
+        } catch (error) {
+            if(error.message.includes("Usuário não encontrado ou  não existente")){
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
+            return res.status(500).send({
+                error: "Erro interno no servidor."
+            });
         }
-        const result= await this.profileService.deleteProfile(payload)
-        res.send({result: result})
     }
 
     updateProfile = async (req, res) => {
