@@ -52,11 +52,25 @@ export default class ProfileController {
     }
 
     updateProfile = async (req, res) => {
-        const payload = {
-            ...req.body
+        try {
+            const payload = {
+                userId: req.user.id,
+                ...req.body
+            };
+            const result = await this.profileService.updateProfile(payload);
+            return res.status(200).send({
+                result: result
+            });            
+        } catch (error) {
+            if(error.message.includes("Falha ao atualizar dados")){
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
+            return res.status(500).send({
+                error: "Erro interno no servidor."
+            });  
         }
-        const result = await this.profileService.updateProfile(payload)
-        res.send({result: result})
     }
 
     viewProfile = async (req, res) => {
