@@ -18,11 +18,9 @@
   display: flex;
 }
 
-/* ---------------------------
-   PAINEL ESQUERDO
-----------------------------*/
+/* Painel esquerdo */
 .left-panel {
-  width: 35%;   /* menor, como você pediu */
+  width: 35%;
   background: #0f0f0f;
   padding: 50px 80px;
   display: flex;
@@ -87,7 +85,7 @@
   font-weight: bold;
   border: 2px solid transparent;
   background: linear-gradient(#111, #111) padding-box,
-              linear-gradient(to right, #ff7a00, #b400ff) border-box;
+              linear-gradient(to right, #1daf9c, #6730d6) border-box;
   color: white;
   cursor: pointer;
   letter-spacing: 1px;
@@ -96,7 +94,7 @@
 
 .signup-btn:hover {
   background: linear-gradient(#181818, #181818) padding-box,
-              linear-gradient(to right, #ff8f2a, #d000ff) border-box;
+              linear-gradient(to right, #1daf9c, #6730d6) border-box;
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
@@ -121,13 +119,18 @@
 
 .logo { 
   font-family: 'Lato', sans-serif;
-  margin-top: 0px;
+  margin-top: 10px;
   text-align: center;
-  font-size: 28px;
-  background: linear-gradient(90deg, #1daf9c, #6730d6 72%);
+  font-size: 2rem;
+  font-weight: 400;
+  background: linear-gradient(90deg, #1a9b8a, #6c33df 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  cursor: pointer;
+  width: fit-content; 
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ---------------------------

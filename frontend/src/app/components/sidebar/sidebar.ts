@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -25,5 +25,13 @@ export class Sidebar {
     this.menuOpen = false;
     this.router.navigate(['/auth/login']);
   }
-  
+
+  // função para fechar a caixa de fazer login quando o click não for dentro dela
+  @HostListener('document:click', ['$event'])
+  clickout(event: any) {
+    if (this.menuOpen && !event.target.closest('.user_options')) {
+      this.menuOpen = false;
+    }
+  }
+
 }
