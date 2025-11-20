@@ -1,5 +1,9 @@
 <div class="profile-box">
 
+    <button *ngIf="isLoggedIn" class="edit-profile-btn" (click)="openModal()">
+        Edit profile
+    </button>
+
     <div class="left">
         <div class="profile-picture"></div>
 
@@ -8,7 +12,7 @@
             <p class="handle">@username</p>
 
             <p class="bio">
-                i love ouçar musga
+                i love ouçar musica
             </p>
 
             <nav class="tabs">
@@ -32,6 +36,40 @@
             <img class="track-cover" src="assets/images/main-track.jpg" alt="Imagem da faixa principal">
         </div>
         
+    </div>
+</div>
+
+<div class="modal-overlay" *ngIf="isEditModalOpen" (click)="closeModal()">
+    
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        
+        <div class="modal-header">
+            <div class="header-left">
+                <span class="material-icons-outlined close-icon" (click)="closeModal()">close</span>
+                <h3>Edit Profile</h3>
+            </div>
+            <button class="save-btn" (click)="saveProfile()">Save</button>
+        </div>
+
+        <div class="modal-body">
+            
+            <div class="edit-avatar-centered">
+                <div class="avatar-circle">
+                    <span class="material-icons-outlined camera-icon">add_a_photo</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" value="Username">
+            </div>
+
+            <div class="form-group">
+                <label>Bio</label>
+                <textarea rows="3">i love ouçar musica</textarea>
+            </div>
+
+        </div>
     </div>
 </div>
 
