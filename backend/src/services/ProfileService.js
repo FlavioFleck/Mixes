@@ -24,6 +24,22 @@ export default class ProfileService {
         return result
     }
 
+    async updateProfile(payload) {
+        const existingProfile = await this.profileRespository.getByUserId({userId: payload.userId})
+
+        let updatedData = {
+            ...existingProfile, ...payload
+        };
+
+        const updatedProfile = new Profile (updatedData);
+
+        const result = await this.profileRespository.update(updatedProfile);
+        if(!result) {
+            throw new Error("Falha ao atualizar dados.")
+        }
+        return result;
+    }
+
     async getProfileByUsername(payload) {
         const result = await this.profileRespository.getByUsername(payload);
         return result;

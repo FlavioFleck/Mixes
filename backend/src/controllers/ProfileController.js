@@ -40,7 +40,7 @@ export default class ProfileController {
                 result: result
             });
         } catch (error) {
-            if(error.message.includes("Usuário não encontrado ou  não existente")){
+            if(error.message.includes("Usuário não encontrado ou não existente")){
                 return res.status(400).send({
                     error: error.message
                 });
@@ -55,7 +55,7 @@ export default class ProfileController {
         const payload = {
             ...req.body
         }
-        const result = await this.profileRepository.updateProfile(payload)
+        const result = await this.profileService.updateProfile(payload)
         res.send({result: result})
     }
 
