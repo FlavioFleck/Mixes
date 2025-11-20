@@ -66,16 +66,4 @@ export default class AuthController {
         }
     };
 
-    profile = async (req, res) => {
-        try {
-            const payload = {
-                ...req.body
-            }
-
-            await this.profileService.createProfile(payload)
-            res.status(200).send({ message: "Perfil criado com sucesso!"});
-        } catch (err) {
-            res.status(400).send({ message: "Falha no registro", error: err.message});
-        }
-    }
 }

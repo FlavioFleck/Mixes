@@ -8,9 +8,6 @@ const authController = new AuthController(connection)
 //Criação do usuário
 router.post("/register", authController.register)
 
-//Criação do perfil
-router.post("/profile", authController.profile)
-
 //Login do usuário
 router.post("/login", authController.login)
 export default router
