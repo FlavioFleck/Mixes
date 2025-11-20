@@ -9,7 +9,7 @@
 
       <h1 class="title">SIGN UP</h1>
 
-      <form class="register-form" (submit)="register(); $event.preventDefault()">
+      <form class="register-form" (ngSubmit)="register()">
 
         <input type="text" placeholder="Digite seu nome" [(ngModel)]="name" name="name" />
 
@@ -21,7 +21,7 @@
 
         <input type="text" placeholder="Digite sua data de nascimento" mask="00/00/0000" [(ngModel)]="birthday" name="birthday">
 
-        <button type="button" class="signup-btn" (click)="register()">Sign Up</button>
+        <button type="submit" class="signup-btn">Sign Up</button>
 
         <p class="login-text">
           Já possui uma conta?

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
 import { AuthService } from '../../../services/auth.service'
@@ -8,7 +8,7 @@ import { AuthService } from '../../../services/auth.service'
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterLink, FormsModule, ReactiveFormsModule, NgxMaskDirective, NgxMaskPipe],
+  imports: [CommonModule, RouterLink, FormsModule, NgxMaskDirective, NgxMaskPipe],
   templateUrl: './register.html',
   styleUrl: './register.css',
   providers: [ provideNgxMask() ]
@@ -26,20 +26,25 @@ export class Register {
   }
 
   register(){
+    console.log("birthday:", this.birthday);
+
     const cpfNoMask = this.cpf.replace(/\D/g,'');
 
-    function formatDate(date: string) {
-      const [day, month, year] = date.split('/');
-      return `${year}-${month}-${day}`;
-    } 
+    let dateRaw = this.birthday.replace(/\D/g, ""); 
+
+    if (dateRaw.length === 8) {
+      const dia = dateRaw.substring(0, 2);
+      const mes = dateRaw.substring(2, 4);
+      const ano = dateRaw.substring(4, 8);
+      this.birthday = `${ano}-${mes}-${dia}`; 
+    }
 
     const payload = {
       name: this.name,
       cpf: cpfNoMask,
       email: this.email,
       password: this.password,
-      birthday: this.birthday.includes('/') ? 
-      formatDate(this.birthday):this.birthday
+      birthday: this.birthday
     };
 
     this.authService.register(payload).subscribe({
