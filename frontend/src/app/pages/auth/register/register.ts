@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask} from 'ngx-mask';
 import { AuthService } from '../../../services/auth.service'
 
@@ -21,7 +21,7 @@ export class Register {
   password: string = '';
   birthday: string = '';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
@@ -51,7 +51,9 @@ export class Register {
       next: (res: any) => {
         console.log('Usuário criado', res);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('userId', res.userId);
         alert("Registrado com sucesso!");
+        this.router.navigate(['/auth/profile'])
       },
       error: (err) =>{
         alert(err.error.error || "Erro ao registrar-se");
