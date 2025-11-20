@@ -16,9 +16,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.post("/profile/create", authMiddleware, upload.single("profileImage"), profileController.createProfile);
+router.post("/create", authMiddleware, upload.single("profileImage"), profileController.createProfile);
 router.post("/delete", profileController.deleteProfile)
 router.get("/get", profileController.viewProfile)
-router.get("get/:id", profileController.viewProfiles)
+router.get("/get/:id", profileController.viewProfiles)
 
 export default router

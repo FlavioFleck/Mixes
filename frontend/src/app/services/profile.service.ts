@@ -9,9 +9,20 @@ export class ProfileService {
 
   constructor(private http: HttpClient) {}
 
-  createProfile(data: FormData) {
-    return this.http.post(`${this.API_URL}/create`, data);
-  }
+createProfile(data: FormData) {
+  const token = localStorage.getItem('token');
+
+  return this.http.post(
+    `${this.API_URL}/create`,
+    data,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+}
+
 
   updateProfile(data: any) {
     return this.http.put(`${this.API_URL}/update`, data);

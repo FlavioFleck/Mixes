@@ -40,11 +40,11 @@ export class CreateProfile {
     }
 
     this.profileService.createProfile(formData).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         alert('Perfil criado com sucesso');
         this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: (err: any) => {
         alert(err.error.error || 'Erro ao criar perfil');
       }
     });

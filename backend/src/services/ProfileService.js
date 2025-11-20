@@ -48,4 +48,12 @@ export default class ProfileService {
         return result;
     }
 
+    async getAll() {
+    return await this.profileRespository.getAll();
+    }
+
+    async getProfileById({id}) {
+        return await this.profileRespository.getByUserId({userId: id});
+    }
+
 }

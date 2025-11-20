@@ -56,7 +56,8 @@ export default class ProfileController {
         try {
             const payload = {
                 userId: req.user.id,
-                ...req.body
+                ...req.body,
+                profileImage: req.file ? req.file.filename : undefined
             };
             const result = await this.profileService.updateProfile(payload);
             return res.status(200).send({
@@ -75,15 +76,12 @@ export default class ProfileController {
     }
 
     viewProfile = async (req, res) => {
-        const payload = {
-            ...req.params
-        }
-        const result = await this.profileService.getProfileById(payload)
-        res.send({result: result})
+        const result = await this.profileService.getProfileById({ id: req.params.id })
+        res.send({ result })
     }
 
     viewProfiles = async (req, res) => {
         const result = await this.profileService.getAll()
-        res.send({result: result})
+        res.send({ result })
     }
 }

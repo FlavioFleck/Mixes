@@ -16,12 +16,12 @@ export default class ProfileRepository {
         return info.insertId
     }
 
-    async delete({id}) {
+    async delete({userId}) {
         const query = `
             DELETE FROM profiles
                 WHERE user_id = ?;
         `
-        const [info] = await this.connection.query(query, [id])
+        const [info] = await this.connection.query(query, [userId])
         return info.affectedRows
     }
 
