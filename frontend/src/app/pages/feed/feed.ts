@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, Header, Sidebar, Rightbar, Post, FormsModule],
+  imports: [CommonModule, Header, Sidebar, Rightbar, Post, FormsModule, Rightbar],
   templateUrl: './feed.html',
   styleUrl: './feed.css'
 })

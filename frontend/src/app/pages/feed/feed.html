@@ -1,10 +1,15 @@
-<!-- caixa "what's new?" -->
-<form class="new-post-box" (ngSubmit)="createPost()">
-  <div class="user-profile-picture-small" style="background-image: url('https://via.placeholder.com/36')"></div>
-  <input [(ngModel)]="post.content" name="content" type="text" placeholder="What's new?"/>
-  <button class="post-button" type="submit">Post</button>
-</form>
+<main>
+  <!-- caixa "what's new?" -->
+  <section class="content">
+    <form class="new-post-box" (ngSubmit)="createPost()">
+      <div class="user-profile-picture-small" style="background-image: url('https://via.placeholder.com/36')"></div>
+      <input [(ngModel)]="post.content" name="content" type="text" placeholder="What's new?"/>
+      <button class="post-button" type="submit">Post</button>
+    </form>
+    <app-post *ngFor="let p of posts" [data]="p">> </app-post>
+    <app-post></app-post>
+    <app-post></app-post>
+  </section>
 
-<app-post *ngFor="let p of posts" [data]="p">> </app-post>
-<!-- <app-post></app-post>
-<app-post></app-post> -->
+  <app-rightbar class="rightbar"></app-rightbar>
+</main>

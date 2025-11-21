@@ -1,6 +1,27 @@
+main {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 62% 38%;
+    grid-template-rows: 22% 1fr;
+    grid-template-areas:
+    "contentt rightbar"
+    "contentt rightbar";
+}
+
+.content {
+    grid-area: contentt;
+    margin-right: 20px;
+}
+
+.rightbar {
+    grid-area: rightbar;
+}
+
+
 :host {
     display: block;
-    padding: 20px;
+    padding-top: 15px;
+    padding-left: 15px;
 }
 
 /* estilização da caixa "what's new?" */

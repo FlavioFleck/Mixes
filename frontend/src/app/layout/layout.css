@@ -7,11 +7,12 @@
 .main-layout {
     display: grid;
     height: 100%;
-    grid-template-columns: 390px 1fr 390px; /* define as colunaas [sidebar] [conteúdo] [rightbar] */
+    grid-template-columns: 27% 1fr; /* define as colunaas [sidebar] [conteúdo] [rightbar] */
     grid-template-rows: 66px 1fr; /* [header] [conteúdo] */
-    grid-template-areas: "sidebar header header" "sidebar content rightbar";
-    gap: 10px; 
-    background-color: #000000; 
+    grid-template-areas: 
+    "sidebar header" 
+    "sidebar content";
+    background-color: #000000;
 }
 
 /* encaixando cada componente na sua área */
@@ -31,6 +32,7 @@
     overflow-y: auto; /* rolar o feed */
     scrollbar-width: thin;
     scrollbar-color: #333 #121212;
+    margin-top: 10px;
 }
 
 /* estilos da barra de rolagem (chrome/edge/safari) */

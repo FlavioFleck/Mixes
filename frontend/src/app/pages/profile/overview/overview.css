@@ -1,14 +1,12 @@
 .overview-container {
   width: 100%;
   max-width: 100%; /* pega a overview por completo */
-  padding: 20px 10px;
+  padding: 20px 20px;
   color: #fff;
   font-family: "Itim";
-  margin-top: 190px; /* espaçamento entre perfil e recent tracks */
   max-height: calc(100vh - 270px);
   overflow-y: auto;
-  padding-right: 10px; /* espaço pra barra */
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: #333 #121212;
 }
 
@@ -23,6 +21,7 @@
   background-color: #333;
   border-radius: 10px;
   border: 2px solid #121212;
+
 }
 
 /* títulos */
@@ -30,8 +29,7 @@
   display: inline-block;
   font-size: 28px;
   font-weight: 200;
-  margin-bottom: 15px;
-  margin-top: 40px;
+  margin-bottom: 15px
 }
 
 .section-title:hover {
@@ -74,16 +72,17 @@
 }
 
 .song-cover {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
   background: #757575;
   border-radius: 4px;
+  flex: 0 0 auto;
 }
 
 .song-info {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  gap: 20px;
   align-items: center; /* deixa o artist name na mesma linha */
 }
 
@@ -96,7 +95,7 @@
 .artist-name {
   font-size: 14px;
   color: #fff;
-  margin-right: 400px;
+  /* margin-right: 400px; */
   text-align: center;
 }
 
@@ -108,9 +107,8 @@
 /* estilizando cards do top artists */
 .artists-grid {
   display: grid;
-  grid-template-columns: repeat(4, 200px); /* tamanho dos cards */
+  grid-template-columns: repeat(4, 25%); /* tamanho dos cards */
   gap: 0;
-  padding: 12px 30px 25px 30px; /* deixa o top mais fechado */
 }
 
 .artist-card {
