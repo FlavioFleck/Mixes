@@ -6,7 +6,9 @@
       <input [(ngModel)]="post.content" name="content" type="text" placeholder="What's new?"/>
       <button class="post-button" type="submit">Post</button>
     </form>
-    <app-post *ngFor="let p of posts" [data]="p">> </app-post>
+    <section class="posts">
+      <app-post *ngFor="let p of posts" [data]="p">> </app-post>
+    </section>
   </section>
 
   <app-rightbar class="rightbar"></app-rightbar>
