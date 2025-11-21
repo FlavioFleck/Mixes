@@ -14,7 +14,7 @@ export default class ProfileController {
             };
 
             const result = await this.profileService.createProfile(payload);
-            const profile = await this.profileService.getProfileById({id: payload.userId})
+            const profile = await this.profileService.getProfileByUserId(payload);
 
             return res.status(201).send({
                 message: "Perfil criado com sucesso!",
@@ -81,10 +81,18 @@ export default class ProfileController {
         }
     }
 
-    viewProfile = async (req, res) => {
-        const result = await this.profileService.getProfileById({ id: req.params.id })
-        res.send({ result })
-    }
+    viewMyProfile = async (req, res) => {
+        try {
+            const userId = req.user.sub; 
+
+            const profile = await this.profileService.getProfileByUserId({ userId });
+
+            return res.status(200).send({ profile });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).send({ error: "Erro interno no servidor." });
+        }
+    };
 
     viewProfiles = async (req, res) => {
         const result = await this.profileService.getAll()

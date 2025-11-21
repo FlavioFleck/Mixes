@@ -9,18 +9,18 @@
 
       <h1 class="title">LOGIN</h1>
 
-      <form class="login-form">
+      <form class="login-form" [formGroup]="form" (ngSubmit)="submit()">
 
-        <input type="email" placeholder="Type your email" />
+        <input type="email" placeholder="Type your email" formControlName="email" />
 
-        <input type="password" placeholder="Type your password" />
+        <input type="password" placeholder="Type your password" formControlName="password" />
 
         <label class="remember">
           <input type="checkbox" />
           Remember-me
         </label>
 
-        <button class="login-btn">LOGIN</button>
+        <button type="submit" class="login-btn">LOGIN</button>
 
         <p class="signup-text">
           Doesn’t have an account?
