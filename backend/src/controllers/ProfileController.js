@@ -9,7 +9,7 @@ export default class ProfileController {
         try {
             const payload = {
                 ...req.body,
-                userId: req.user.id,
+                userId: req.user.sub,
                 profileImage: req.file ? req.file.filename : null
             };
 
@@ -35,7 +35,7 @@ export default class ProfileController {
     deleteProfile = async (req, res) => {
         try {
             const payload ={
-                userId: req.user.id
+                userId: req.user.sub
             }
             const result= await this.profileService.deleteProfile(payload)
             return res.status(200).send({
@@ -57,7 +57,7 @@ export default class ProfileController {
     updateProfile = async (req, res) => {
         try {
             const payload = {
-                userId: req.user.id,
+                userId: req.user.sub,
                 ...req.body,
                 profileImage: req.file ? req.file.filename : undefined
             };
