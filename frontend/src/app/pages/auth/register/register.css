@@ -73,7 +73,7 @@
 }
 
 .register-form input:focus {
-  border-color: #ff7a00;
+  border-color: #00f7c1;
   box-shadow: #b400ff;
   background: #141414;
 }

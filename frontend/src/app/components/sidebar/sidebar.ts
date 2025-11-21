@@ -46,6 +46,11 @@ ngOnInit() {
 
   logout() {
     localStorage.clear();
+
+    this.userName = null;
+    this.userImage = null;
+    this.isLoggedIn = false;
+
     this.menuOpen = false;
     this.router.navigate(['/']);
   }
