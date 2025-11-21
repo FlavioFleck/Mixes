@@ -32,7 +32,6 @@
     overflow-y: auto; /* rolar o feed */
     scrollbar-width: thin;
     scrollbar-color: #333 #121212;
-    margin-top: 10px;
 }
 
 /* estilos da barra de rolagem (chrome/edge/safari) */
