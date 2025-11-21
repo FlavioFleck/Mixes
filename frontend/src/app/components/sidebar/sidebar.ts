@@ -25,8 +25,13 @@ ngOnInit() {
 
   if (user) {
     const parsed = JSON.parse(user);
-    this.userName = parsed.username;
-    this.userImage = parsed.profileImage; 
+    this.userName = parsed.username || null;
+    this.userImage = parsed.profile_image
+      ? `http://localhost:5010/uploads/profile/${parsed.profile_image}`
+      : null;
+    this.isLoggedIn = true;
+  } else {
+    this.isLoggedIn = false;
   }
 }
 

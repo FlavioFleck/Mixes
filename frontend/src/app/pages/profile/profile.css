@@ -1,7 +1,7 @@
 main {
   display: grid;
   height: 100%;
-  grid-template-columns: 62% 38%;
+  grid-template-columns: 1fr 28%;
   grid-template-rows: 22% 1fr;
   grid-template-areas:
   "header header"

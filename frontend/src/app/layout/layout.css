@@ -7,7 +7,7 @@
 .main-layout {
     display: grid;
     height: 100%;
-    grid-template-columns: 27% 1fr; /* define as colunaas [sidebar] [conteúdo] [rightbar] */
+    grid-template-columns: 20% 1fr; /* define as colunaas [sidebar] [conteúdo] [rightbar] */
     grid-template-rows: 66px 1fr; /* [header] [conteúdo] */
     grid-template-areas: 
     "sidebar header" 
