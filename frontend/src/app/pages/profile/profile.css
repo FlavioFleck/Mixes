@@ -20,3 +20,9 @@ main {
   grid-area: rightbar;
 }
 
+
+@media (max-width: 1500px) {
+    main {
+      grid-template-columns: 1fr 35%;
+    }
+}

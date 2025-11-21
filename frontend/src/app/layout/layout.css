@@ -74,9 +74,17 @@
     overflow: visible !important;
     position: relative;
     z-index: 2;
+    margin-top: 10px;
 }
 
 /* permite elementos da pagina ultrapassarem grid */
 .profile-route .main-layout {
     overflow: visible !important;
+}
+
+
+@media (max-width: 1500px) {
+    .main-layout {
+        grid-template-columns: 23% 1fr;
+    }
 }

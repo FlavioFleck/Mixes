@@ -1,7 +1,7 @@
 main {
     display: grid;
     height: 100%;
-    grid-template-columns: 62% 38%;
+    grid-template-columns: 1fr 28%;
     grid-template-rows: 22% 1fr;
     grid-template-areas:
     "contentt rightbar"
@@ -22,6 +22,7 @@ main {
     display: block;
     padding-top: 15px;
     padding-left: 15px;
+    height: 100%;
 }
 
 /* estilização da caixa "what's new?" */
@@ -82,4 +83,12 @@ main {
 
 .new-post-box .post-button:hover {
     filter: brightness(1.2);
+}
+
+
+
+@media (max-width: 1500px) {
+    main {
+      grid-template-columns: 1fr 35%;
+    }
 }
