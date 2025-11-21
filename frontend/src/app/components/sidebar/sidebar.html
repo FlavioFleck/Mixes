@@ -22,14 +22,30 @@
     </a>
   </nav>
 
-  <div class="user_options" (click)="toggleMenu()">
-    <a href="#" class="nav-item">
-      <span class="material-icons-outlined">person_outline</span>
-      {{userName || 'Entrar'}}
-    </a>
+  <!-- USER AREA -->
+<div class="user_options" (click)="toggleMenu()">
 
-  <div class="user-menu" *ngIf="menuOpen" (click)="$event.stopPropagation()">
-    <button class="menu-item" (click)="login(); $event.stopPropagation()">Fazer login</button>
-  </div>
+  <a class="nav-item">
+    <img *ngIf="userImage" [src]="userImage" class="profile-pic" />
+    <span class="material-icons-outlined" *ngIf="!userImage">person_outline</span>
+
+    {{ userName || 'Entrar' }}
+  </a>
+
+    <!-- SE NÃO TIVER LOGADO -->
+    <ng-template #notLogged>
+      <a class="nav-item">
+        <span class="material-icons-outlined">person_outline</span>
+        Entrar
+      </a>
+    </ng-template>
+
+    <div class="user-menu" *ngIf="menuOpen">
+
+      <button *ngIf="!userName" class="menu-item" (click)="login()">Fazer login</button>
+
+      <button *ngIf="userName" class="menu-item" (click)="logout()">Sair da conta</button>
+
+    </div>
   </div>
 </div>

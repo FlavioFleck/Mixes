@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -10,12 +10,25 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css',
 })
-export class Sidebar {
+export class Sidebar implements OnInit {
 
   constructor(private router: Router) {}
 
   menuOpen = false;
+
+  isLoggedIn = false;
   userName: string | null = null;
+  userImage: string | null = null;
+
+ngOnInit() {
+  const user = localStorage.getItem('profile');
+
+  if (user) {
+    const parsed = JSON.parse(user);
+    this.userName = parsed.username;
+    this.userImage = parsed.profileImage; 
+  }
+}
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -26,12 +39,16 @@ export class Sidebar {
     this.router.navigate(['/auth/login']);
   }
 
-  // função para fechar a caixa de fazer login quando o click não for dentro dela
+  logout() {
+    localStorage.clear();
+    this.menuOpen = false;
+    this.router.navigate(['/']);
+  }
+
   @HostListener('document:click', ['$event'])
   clickout(event: any) {
     if (this.menuOpen && !event.target.closest('.user_options')) {
       this.menuOpen = false;
     }
   }
-
 }

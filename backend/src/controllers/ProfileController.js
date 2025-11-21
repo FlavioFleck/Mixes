@@ -14,9 +14,12 @@ export default class ProfileController {
             };
 
             const result = await this.profileService.createProfile(payload);
+            const profile = await this.profileService.getProfileById({id: payload.userId})
+
             return res.status(201).send({
                 message: "Perfil criado com sucesso!",
-                id: result
+                id: result,
+                profile: profile
             });
         } catch (error) {
             console.error(error);

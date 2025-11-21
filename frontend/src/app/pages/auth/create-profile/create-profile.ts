@@ -41,6 +41,9 @@ export class CreateProfile {
 
     this.profileService.createProfile(formData).subscribe({
       next: (res: any) => {
+
+        localStorage.setItem("profile", JSON.stringify(res.profile));
+
         alert('Perfil criado com sucesso');
         this.router.navigate(['/']);
       },
