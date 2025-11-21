@@ -24,6 +24,11 @@
     font-size: 26px;
     cursor: pointer;
     color: #B1B1B1;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateX(-4px);
 }
 
 /* === CÍRCULO DA FOTO === */
@@ -31,17 +36,36 @@
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 1px solid #4A4A4A; /* mais claro */
+    border: 1px solid #4A4A4A;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: 0.2s ease;
+    overflow: hidden;
+    background: #1b1b1b;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
+.profile-photo:hover {
+    border-color: #7F7F7F;
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.08);
+}
+
+/* ÍCONE (quando não tem foto) */
 .profile-photo img {
-    width: 50px;
-    opacity: 0.7;
+    width: 85px; 
+    opacity: 0.8;
     filter: invert(80%);
+    object-fit: cover;
+}
+
+/* Imagem quando é foto de verdade */
+.profile-photo.has-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    opacity: 1;
+    filter: none;
 }
 
 /* === TEXTO "Carregar foto" === */
@@ -49,6 +73,7 @@
     margin-top: -10px;
     font-size: 14px;
     color: #BEBEBE;
+    cursor: pointer;
 }
 
 /* === INPUTS E TEXTAREA === */
@@ -56,7 +81,7 @@
 .textarea {
     width: 500px;
     background: transparent;
-    border: 1px solid #4A4A4A; /* cinza mais claro */
+    border: 1px solid #4A4A4A;
     border-radius: 30px;
     padding: 15px 20px;
     font-size: 14px;
@@ -71,13 +96,14 @@
     resize: none;
 }
 
-/* === FOCUS DOS INPUTS === */
+/* Focus */
 .input:focus,
 .textarea:focus {
-    border-color: #7F7F7F; /* borda destacada */
+    border-color: #7F7F7F;
     box-shadow: 0 0 6px rgba(255, 255, 255, 0.08);
 }
 
+/* === BOTÃO === */
 .btn {
     width: 300px;
     padding: 14px 0;
@@ -89,14 +115,12 @@
     cursor: pointer;
     transition: 0.25s ease-in-out;
 
-    /* Gradiente suave EXACT como o da imagem */
     background-image: linear-gradient(#0D0D0D, #0D0D0D),
                       linear-gradient(90deg, #1CA39E, #2F6DB5, #8C2BD1);
     background-origin: border-box;
     background-clip: padding-box, border-box;
 }
 
-/* Hover suave como no modelo */
 .btn:hover {
     transform: translateY(-2px);
     filter: brightness(1.2);

@@ -2,16 +2,23 @@
 
   <div class="back-btn" (click)="router.navigate(['/'])">←</div>
 
-  <div class="profile-photo" (click)="fileInput.click()">
+  <div class="profile-photo" 
+       [class.has-image]="imagePreview"
+       (click)="fileInput.click()">
     <img [src]="imagePreview || 'https://img.icons8.com/ios-glyphs/90/ffffff/camera.png'" />
   </div>
 
   <p class="label" (click)="fileInput.click()">Carregar foto de perfil</p>
-  <input #fileInput type="file" (change)="onFileChange($event)" hidden/>
+  <input #fileInput type="file" (change)="onFileChange($event)" hidden />
 
-  <input type="text" placeholder="Digite seu nome de usuário" class="input" [(ngModel)]="username"/>
+  <input type="text" 
+         placeholder="Digite seu nome de usuário" 
+         class="input" 
+         [(ngModel)]="username" />
 
-  <textarea placeholder="Digite sua biografia" class="textarea" [(ngModel)]="bio"></textarea>
+  <textarea placeholder="Digite sua biografia" 
+            class="textarea" 
+            [(ngModel)]="bio"></textarea>
 
   <button class="btn" (click)="createProfile()">Criar perfil</button>
 
