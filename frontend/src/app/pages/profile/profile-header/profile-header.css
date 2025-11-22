@@ -316,3 +316,8 @@
 .form-group textarea {
   resize: none;
 }
+
+.profile-picture {
+  background-size: cover;
+  background-repeat: no-repeat;
+}

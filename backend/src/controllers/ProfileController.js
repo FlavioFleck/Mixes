@@ -85,7 +85,7 @@ export default class ProfileController {
         try {
             const userId = req.user.sub; 
 
-            const profile = await this.profileService.getProfileByUserId({ userId });
+            const profile = await this.profileService.getProfileByUserId({ user_id: userId });
 
             return res.status(200).send({ profile });
         } catch (error) {

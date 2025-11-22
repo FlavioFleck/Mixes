@@ -10,8 +10,37 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
   styleUrl: './profile-header.css',
 })
 export class ProfileHeader {
-    isLoggedIn = true; // simulação de usuario logado (se mudar p false o botão some)
-  isEditModalOpen = false; // controle do modal
+
+  isLoggedIn = false;
+  isEditModalOpen = false;
+
+  user: any = null;      
+  profile: any = null;  
+
+  constructor() {
+    const token = localStorage.getItem("token");
+    const savedProfile = localStorage.getItem("profile");
+
+    if (token) {
+      this.isLoggedIn = true;
+      this.user = this.decodeToken(token);
+    }
+
+    if (savedProfile) {
+      this.profile = JSON.parse(savedProfile);
+    }
+  }
+
+  decodeToken(token: string) {
+    try {
+      const payload = token.split('.')[1];
+      const decoded = JSON.parse(atob(payload));
+      return decoded;
+    } catch (err) {
+      console.error('Erro ao decodificar token:', err);
+      return null;
+    }
+  }
 
   openModal() {
     this.isEditModalOpen = true;
@@ -22,7 +51,6 @@ export class ProfileHeader {
   }
 
   saveProfile() {
-    // lógica de salvar no backend entra aqui
     console.log('Perfil salvo!');
     this.closeModal();
   }

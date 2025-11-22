@@ -52,8 +52,8 @@ export default class ProfileService {
     return await this.profileRespository.getAll();
     }
 
-    async getProfileByUserId({ userId }) {
-        return await this.profileRespository.getByUserId({userId});
+    async getProfileByUserId({ user_id }) {
+        return await this.profileRespository.getByUserId({user_id});
     }
 
 }
