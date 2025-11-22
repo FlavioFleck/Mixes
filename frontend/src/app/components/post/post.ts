@@ -1,4 +1,4 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input} from '@angular/core';
 import { CommonModule } from '@angular/common'; // *ngIf
 
 import { PostService } from '../../services/post.service'
@@ -16,7 +16,7 @@ export class Post {
 
   public isMenuOpen = false;
   public liked = false;
- 
+
   constructor(private postService: PostService){}
 
   onLikeClick() {

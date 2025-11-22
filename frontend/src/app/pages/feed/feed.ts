@@ -7,37 +7,32 @@ import { Rightbar } from '../../components/rightbar/rightbar';
 import { Post } from '../../components/post/post';
 import { PostService } from '../../services/post.service';
 import { FormsModule } from '@angular/forms';
+import { PostWriter } from '../../components/post-writer/post-writer';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [CommonModule, Header, Sidebar, Rightbar, Post, FormsModule, Rightbar],
+  imports: [CommonModule, Header, Sidebar, Rightbar, Post, FormsModule, Rightbar, PostWriter],
   templateUrl: './feed.html',
   styleUrl: './feed.css'
 })
 
 export class Feed {
-  post = {
-    userId: 0,
-    content: "",
-    file: null,
-    songId: null,
-    postFatherId: null
-  }
-
   posts: any[] = [];
 
   constructor(private postService: PostService) {}
-  
-  createPost() {
-    this.postService.createPost(this.post).subscribe({
-      next: (res) => {
-        console.log("Post criado", res)
-        this.posts.unshift(res);
-      },
-      error: (err) => {
-        console.log("Erro ao criar post", err)
-      }
+
+  ngOnInit() {
+    this.loadFeed();
+  }
+
+  loadFeed() {
+    this.postService.getPosts().subscribe((res: any[]) => {
+      this.posts = res
     })
+  }
+
+  onPostCreated(post: any) {
+    this.posts.unshift(post);
   }
 }

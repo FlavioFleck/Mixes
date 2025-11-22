@@ -1,11 +1,11 @@
 <article class="post-card">
   
   <header class="post-header">
-    <div class="user-profile-picture" style="background-image: url('https://via.placeholder.com/40')"></div>
+    <img [src]="'http://localhost:5010/uploads/profile/' + data.user.avatar" class="user-profile-picture">
 
     <div class="user-info">
-      <span class="username">Username</span>
-      <span class="handle">@username · 10 hours ago</span>
+      <span class="username">{{data.user.name}}</span>
+      <span class="handle">@{{data.user.username}} · 10 hours ago</span>
     </div>
     
     <span class="material-icons-outlined options-icon" (click)="toggleMenu($event)">more_vert</span>

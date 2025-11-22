@@ -1,15 +1,32 @@
 import Post from "../models/Post.js"
 import PostRepository from "../repositories/PostRepository.js"
+import ProfileRepository from "../repositories/ProfileRepository.js"
+import UserRepository from "../repositories/UserRepository.js"
 
 export default class PostService {
     constructor(connection) {
         this.postRepository = new PostRepository(connection)
+        this.profileRepository = new ProfileRepository(connection)
+        this.userRespository = new UserRepository(connection)
     }
 
     async createPost(payload) {
         const post = new Post(payload)
-        const result = await this.postRepository.add(post)
-        return result
+        const postR = await this.postRepository.add(post)
+        const profile = await this.profileRepository.getByUserId({user_id: postR.user_id})
+        const user = await this.userRespository.getById({id: postR.user_id})
+        const response = {
+            id: postR.id,
+            content: postR.content,
+            created_at: postR.created_at,
+            user: {
+                id: profile.id,
+                name: user.name,
+                username: profile.username,
+                avatar: profile.profile_image
+            }
+        }
+        return response
     }
 
     async deletePost(payload) {
@@ -18,8 +35,24 @@ export default class PostService {
     }
 
     async getAllPosts() {
-        const result = await this.postRepository.getAll()
-        return result
+        const posts = await this.postRepository.getAll()
+        const payload = []
+        for(const post of posts) {
+            const profile = await this.profileRepository.getByUserId({user_id: post.user_id})
+            const user = await this.userRespository.getById({id: post.user_id})
+            payload.push({
+                id: post.id,
+                content: post.content,
+                createdAt: post.created_at,
+                user: {
+                    id: profile.id,
+                    name: user.name,
+                    username: profile.username,
+                    avatar: profile.profile_image
+                }
+            })
+        }
+        return payload
     }
 
     async getPostById(payload) {

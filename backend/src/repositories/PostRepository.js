@@ -4,7 +4,7 @@ export default class PostRepository {
     }
 
     async add({userId, content, file, songId, postFatherId}) {
-        const query = "INSERT INTO posts (user_id, content, files, song_id, post_father_id) VALUES (?, ?);"
+        const query = "INSERT INTO posts (user_id, content, files, song_id, post_father_id) VALUES (?, ?, ?, ?, ?);"
         const [info] = await this.connection.query(query, [
             userId, 
             content, 
@@ -12,7 +12,9 @@ export default class PostRepository {
             songId, 
             postFatherId
         ])
-        return info.insertId
+
+        const post = await this.getById({id: info.insertId})
+        return post
     }
 
     async delete({id}) {
@@ -22,13 +24,13 @@ export default class PostRepository {
     }
 
     async getAll() {
-        const query = "SELECT * FROM posts"
+        const query = " SELECT * FROM posts ORDER BY created_at DESC"
         const [info] = await this.connection.query(query)
         return info
     }
 
     async getById({id}) {
-        const query = "SELECT * FROM posts WHERE id ?"
+        const query = "SELECT * FROM posts WHERE id = ?"
         const [info] = await this.connection.query(query, [id])
         return info[0]
     }

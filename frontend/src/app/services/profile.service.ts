@@ -32,6 +32,10 @@ createProfile(data: FormData) {
     return this.http.delete(`${this.API_URL}/delete`);
   }
 
+  getProfile() {
+    
+  }
+
   getProfileByUsername(username: string) {
     return this.http.get(`${this.API_URL}/${username}`);
   }

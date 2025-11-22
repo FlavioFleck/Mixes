@@ -5,8 +5,8 @@ import PostController from '../controllers/PostController.js'
 const router = express.Router()
 const postController = new PostController(connection)
 
-//Criação do usuário
+
 router.post("/create", postController.createPost)
-router.get("/get", postController.getPostById)
+router.get("/getAll", postController.getAllPosts)
 
 export default router

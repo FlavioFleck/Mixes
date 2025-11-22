@@ -10,8 +10,8 @@ export default class PostController {
             ...req.body
         }
 
-        // const result = await this.postService.getNotificationsByUserId(payload)
-        res.send(payload)
+        const post = await this.postService.createPost(payload)
+        res.send(post)
     }
 
     getPostById = async(req, res) => {
@@ -21,5 +21,10 @@ export default class PostController {
 
         const result = await this.postService.getPostById(payload)
         res.send(result)
+    }
+
+    getAllPosts = async(req, res) => {
+        const posts = await this.postService.getAllPosts();
+        return res.send(posts)
     }
 }

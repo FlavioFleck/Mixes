@@ -15,11 +15,15 @@ export class PostService {
     return this.http.post(`${this.API_LIKE_URL}/create`, like)
   }
 
-  createPost(product: any) {
-    return this.http.post(`${this.API_POST_URL}/create`, product)
+  createPost(post: any) {
+    return this.http.post(`${this.API_POST_URL}/create`, post)
   }
 
   getPostId() {
     return this.http.get(`${this.API_POST_URL}/get`)
+  }
+
+  getPosts(): any {
+    return this.http.get(`${this.API_POST_URL}/getAll`)
   }
 }
