@@ -33,15 +33,33 @@
     </div>
   </footer>
 
+  <!-- menu -->
   <div *ngIf="isMenuOpen" class="post-options-menu">
-    <a href="#" class="menu-item">
-      <span class="material-icons-outlined">block</span>
-      <span class="menu-text">Block @username</span>
-    </a>
-    <a href="#" class="menu-item">
-      <span class="material-icons-outlined">person_add_alt</span>
-      <span class="menu-text">Follow @username</span>
-    </a>
+
+    <!-- se for dono do post -->
+    <ng-container *ngIf="isOwner; else feedMenu">
+      <a href="#" class="menu-item" (click)="editPost()">
+        <span class="material-icons-outlined">edit</span>
+        <span class="menu-text">Edit post</span>
+      </a>
+      <a href="#" class="menu-item" (click)="deletePost()">
+        <span class="material-icons-outlined">delete</span>
+        <span class="menu-text">Delete post</span>
+      </a>
+    </ng-container>
+
+    <!-- se não for dono (feed normal) -->
+    <ng-template #feedMenu>
+      <a href="#" class="menu-item">
+        <span class="material-icons-outlined">block</span>
+        <span class="menu-text">Block @username</span>
+      </a>
+      <a href="#" class="menu-item">
+        <span class="material-icons-outlined">person_add_alt</span>
+        <span class="menu-text">Follow @username</span>
+      </a>
+    </ng-template>
+
   </div>
 
 </article>

@@ -12,12 +12,12 @@ import { PostService } from '../../services/post.service'
 })
 export class Post {
   @Input() data: any
+  @Input() isOwner: boolean = false;
+
   public isMenuOpen = false;
   public liked = false;
  
-
   constructor(private postService: PostService){}
-
 
   onLikeClick() {
     this.liked = !this.liked
@@ -39,5 +39,13 @@ export class Post {
   @HostListener('document:click')
   onDocumentClick() {
       this.isMenuOpen = false;
+  }
+
+  editPost() {
+    console.log("Edit post", this.data);
+  }
+
+  deletePost() {
+    console.log("Delete post", this.data);
   }
 }
