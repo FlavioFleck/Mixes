@@ -1,0 +1,27 @@
+.profile-posts-container {
+    width: 100%;
+    padding: 30px;
+    max-height: calc(100vh - 270px);
+    overflow-y: auto;
+    padding-right: 30px; 
+    scrollbar-width: none;
+    scrollbar-color: transparent transparent;
+}
+
+/* barra no chrome */
+.profile-posts-container::-webkit-scrollbar {
+  width: 0px;
+}
+.profile-posts-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.profile-posts-container::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: none;
+}
+
+.posts-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}

@@ -1,1 +1,7 @@
-<p>posts works!</p>
+<div class="profile-posts-container">
+
+  <div class="posts-wrapper">
+    <app-post *ngFor="let p of userPosts" [data]="p"></app-post>
+  </div>
+
+</div>
