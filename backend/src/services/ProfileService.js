@@ -25,13 +25,17 @@ export default class ProfileService {
     }
 
     async updateProfile(payload) {
-        const existingProfile = await this.profileRespository.getByUserId({userId: payload.userId})
+        const { userId } = payload
+
+        const existingProfile = await this.profileRespository.getByUserId({user_id: userId})
         if (!existingProfile) {
             throw new Error("Perfil não encontrado.");
         }
         
         let updatedData = {
-            ...existingProfile, ...payload
+            ...existingProfile, 
+            ...payload,
+            profileImage: payload.profileImage ?? existingProfile.profile_image
         };
 
         const updatedProfile = new Profile (updatedData);
