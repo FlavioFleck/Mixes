@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { ProfileService } from '../../../services/profile.service';
+import { UserStateService } from '../../../services/user-state';
 
 @Component({
   selector: 'app-create-profile',
@@ -12,12 +13,17 @@ import { ProfileService } from '../../../services/profile.service';
   styleUrl: './create-profile.css',
 })
 export class CreateProfile {
+
   username = '';
   bio = '';
   image: File | null = null;
-  imagePreview: string | null = null; 
+  imagePreview: string | null = null;
 
-  constructor(private profileService: ProfileService, public router: Router) {}
+  constructor(
+    private profileService: ProfileService,
+    private userState: UserStateService,
+    public router: Router
+  ) {}
 
   onFileChange(event: any) {
     const file = event.target.files[0];
@@ -43,6 +49,8 @@ export class CreateProfile {
       next: (res: any) => {
 
         localStorage.setItem("profile", JSON.stringify(res.profile));
+
+        this.userState.updateUser(res.profile);
 
         alert('Perfil criado com sucesso');
         this.router.navigate(['/']);

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -13,7 +13,11 @@ import { UserStateService } from '../../services/user-state';
 })
 export class Sidebar implements OnInit {
 
-  constructor(private router: Router, private userState: UserStateService) {}
+  constructor(
+    private router: Router, 
+    private userState: UserStateService,
+    private cd: ChangeDetectorRef 
+  ){}
 
   menuOpen = false;
   isLoggedIn = false;
@@ -22,6 +26,7 @@ export class Sidebar implements OnInit {
 
   ngOnInit() {
     this.loadFromLocalStorage();
+    this.cd.detectChanges(); 
 
     this.userState.user$.subscribe((profile: any) => {
       if (profile) {
@@ -35,6 +40,8 @@ export class Sidebar implements OnInit {
         this.userName = null;
         this.userImage = null;
       }
+
+      this.cd.detectChanges(); 
     });
   }
 
@@ -47,10 +54,14 @@ export class Sidebar implements OnInit {
         ? `http://localhost:5010/uploads/profile/${parsed.profile_image}`
         : null;
       this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
     }
   }
 
-  toggleMenu() { this.menuOpen = !this.menuOpen; }
+  toggleMenu() { 
+    this.menuOpen = !this.menuOpen; 
+  }
 
   login() {
     this.menuOpen = false;
@@ -64,10 +75,12 @@ export class Sidebar implements OnInit {
     this.userImage = null;
     this.isLoggedIn = false;
 
-    this.userState.updateUser(null);
+    this.userState.updateUser(null); 
 
     this.menuOpen = false;
     this.router.navigate(['/']);
+
+    this.cd.detectChanges(); 
   }
 
   @HostListener('document:click', ['$event'])

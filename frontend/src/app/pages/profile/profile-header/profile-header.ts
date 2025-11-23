@@ -24,6 +24,7 @@ export class ProfileHeader {
   bio: string = '';
   username: string = '';
   selectedImage: File | null = null;
+  imagePreview: string | null = null;
 
   constructor(private http: HttpClient, private userState: UserStateService) {  
     const token = localStorage.getItem("token");
@@ -58,7 +59,18 @@ export class ProfileHeader {
   }
 
   handleImage(event: any) {
-    this.selectedImage = event.target.files[0];
+    const file = event.target.files[0];
+
+    if (file) {
+      this.selectedImage = file;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
   }
 
   openModal() {

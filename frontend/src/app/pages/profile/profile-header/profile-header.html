@@ -64,13 +64,16 @@
 
     <div class="modal-body">
 
-        <div class="edit-avatar-centered">
-            <div class="avatar-circle" (click)="fileInput.click()">
-                <span class="material-icons-outlined camera-icon">add_a_photo</span>
-                    <input #fileInput type="file" accept="image/*" style="display: none" (change)="handleImage($event)"/>
-            </div>
-        </div>
+      <div class="edit-avatar-centered">
 
+        <div class="avatar-circle" (click)="fileInput.click()">
+            <img *ngIf="imagePreview; else currentImage" [src]="imagePreview" class="preview-img" />
+            <ng-template #currentImage>
+              <img [src]="profile?.profile_image ? 'http://localhost:5010/uploads/profile/' + profile.profile_image : 'assets/images/default-avatar.png'" class="preview-img"/>
+            </ng-template>
+            <input #fileInput type="file" accept="image/*" style="display: none" (change)="handleImage($event)" />
+        </div>
+      </div>
         <div class="form-group">
             <label>Username</label>
             <input type="text" [(ngModel)]="username" [value]="profile?.username" />
