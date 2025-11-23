@@ -36,6 +36,8 @@
   <!-- menu -->
   <div *ngIf="isMenuOpen" class="post-options-menu">
 
+
+
     <!-- se for dono do post -->
     <ng-container *ngIf="isOwner; else feedMenu">
       <a href="#" class="menu-item" (click)="editPost()">

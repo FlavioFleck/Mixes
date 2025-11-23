@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post } from '../../../components/post/post';
 import { PostService } from '../../../services/post.service';
@@ -11,6 +11,10 @@ import { PostService } from '../../../services/post.service';
   styleUrl: './posts.css'
 })
 export class Posts {
+
+  @Input() loggedUserId!: number;
+  isOwner: boolean = true;
+
 
   constructor(private postService: PostService){}
 

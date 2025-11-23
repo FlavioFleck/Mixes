@@ -1,7 +1,7 @@
 <div class="profile-posts-container">
 
   <div class="posts-wrapper">
-    <app-post *ngFor="let p of userPosts" [data]="p" [isOwner]="true"></app-post>
+    <app-post *ngFor="let p of userPosts" [data]="p" [loggedUserId]="loggedUserId"></app-post>
   </div>
 
 </div>

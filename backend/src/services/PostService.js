@@ -20,7 +20,7 @@ export default class PostService {
             content: postR.content,
             created_at: postR.created_at,
             user: {
-                id: profile.id,
+                id: profile.user_id,
                 name: user.name,
                 username: profile.username,
                 avatar: profile.profile_image
@@ -45,7 +45,7 @@ export default class PostService {
                 content: post.content,
                 createdAt: post.created_at,
                 user: {
-                    id: profile.id,
+                    id: profile.user_id,
                     name: user.name,
                     username: profile.username,
                     avatar: profile.profile_image
@@ -71,7 +71,7 @@ export default class PostService {
                 content: post.content,
                 createdAt: post.created_at,
                 user: {
-                    id: profile.id,
+                    id: profile.user_id,
                     name: user.name,
                     username: profile.username,
                     avatar: profile.profile_image

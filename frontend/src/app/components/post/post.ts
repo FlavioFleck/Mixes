@@ -12,12 +12,18 @@ import { PostService } from '../../services/post.service'
 })
 export class Post {
   @Input() data: any
-  @Input() isOwner: boolean = false;
+  @Input() loggedUserId!: number;
+  
+  isOwner: boolean = true;
 
   public isMenuOpen = false;
   public liked = false;
 
   constructor(private postService: PostService){}
+
+  ngOnInit() {
+    this.isOwner = this.loggedUserId === this.data.user.id;
+  }
 
   onLikeClick() {
     this.liked = !this.liked

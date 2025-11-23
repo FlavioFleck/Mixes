@@ -19,10 +19,13 @@ import { PostWriter } from '../../components/post-writer/post-writer';
 
 export class Feed {
   posts: any[] = [];
+  loggedUserId: number = 0
 
   constructor(private postService: PostService) {}
 
   ngOnInit() {
+    const user = JSON.parse(localStorage.getItem("profile")!)
+    this.loggedUserId = user.user_id
     this.loadFeed()
   }
 
@@ -34,5 +37,11 @@ export class Feed {
 
   onPostCreated(post: any) {
     this.posts.unshift(post);
+  }
+
+  getPostOwner() {
+    const user = JSON.parse(localStorage.getItem("profile")!)
+    const userId = user.user_id
+    return userId
   }
 }
