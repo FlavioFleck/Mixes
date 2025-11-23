@@ -34,4 +34,10 @@ export default class PostRepository {
         const [info] = await this.connection.query(query, [id])
         return info[0]
     }
+
+    async getByUserId({user_id}) {
+        const query = "SELECT * FROM posts WHERE user_id = ?"
+        const [info] = await this.connection.query(query, [user_id])
+        return info
+    }
 }

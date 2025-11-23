@@ -23,11 +23,11 @@ export class Feed {
   constructor(private postService: PostService) {}
 
   ngOnInit() {
-    this.loadFeed();
+    this.loadFeed()
   }
 
   loadFeed() {
-    this.postService.getPosts().subscribe((res: any[]) => {
+    this.postService.getPosts().subscribe((res: any) => {
       this.posts = res
     })
   }

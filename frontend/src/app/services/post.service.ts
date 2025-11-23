@@ -23,7 +23,11 @@ export class PostService {
     return this.http.get(`${this.API_POST_URL}/get`)
   }
 
-  getPosts(): any {
+  getPosts() {
     return this.http.get(`${this.API_POST_URL}/getAll`)
+  }
+
+  getPostsByUserId(user_id : any) {
+    return this.http.get(`${this.API_POST_URL}/getByUserId/${user_id}`)
   }
 }

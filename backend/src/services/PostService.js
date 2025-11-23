@@ -59,4 +59,25 @@ export default class PostService {
         const result = await this.postRepository.getById(payload)
         return result
     }
+
+    async getPostsByUserId(payload) {
+        const posts = await this.postRepository.getByUserId(payload)
+        const response = []
+        for(const post of posts) {
+            const profile = await this.profileRepository.getByUserId(payload)
+            const user = await this.userRespository.getById({id: payload.user_id})
+            response.push({
+                id: post.id,
+                content: post.content,
+                createdAt: post.created_at,
+                user: {
+                    id: profile.id,
+                    name: user.name,
+                    username: profile.username,
+                    avatar: profile.profile_image
+                }
+            })
+        }
+        return response
+    }
 }
