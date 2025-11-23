@@ -29,7 +29,7 @@ export default class UserService {
     };
 
     updateUser = async (payload) => {
-        const userId = payload.id;
+        const userId = payload.userId;
 
         const existingUser = await this.userRepository.getById(userId);
         if (!existingUser) {
@@ -51,7 +51,6 @@ export default class UserService {
 
         const updatedUser = new User(updatedData);
         const result = await this.userRepository.update(updatedUser);
-
         if (!result) {
             throw new Error("Falha ao atualizar dados!");
         }
@@ -63,7 +62,6 @@ export default class UserService {
             email: updatedUser.email,
             birthday: updatedUser.birthday
         });
-
         return {
             user: updatedUser,
             token: newToken

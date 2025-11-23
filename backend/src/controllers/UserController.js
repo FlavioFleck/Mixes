@@ -28,8 +28,10 @@ export default class UserController {
     updateUser = async(req, res) => {
         try {
             const payload = {
-                id: req.params.id, 
-                ...req.body};
+                ...req.body,
+                userId: req.user.sub
+            };
+
             const {user, token} = await this.userService.updateUser(payload);
             return res.status(200).send({
                 message: "Usuário atualizado com sucesso!",
