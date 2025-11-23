@@ -92,9 +92,12 @@ export class ProfileHeader {
       next: (res: any) => {
         console.log("USER UPDATE:", res);
 
-        if (res?.result) {
-          localStorage.setItem("user", JSON.stringify(res.result));
-          this.user = res.result;
+        if (res?.token) {
+          localStorage.setItem("token", res.token);
+          
+          const decoded = this.decodeToken(res.token);
+          this.user = decoded;
+          this.name = decoded.name;
         }
       },
       error: err => console.error("Erro update user:", err)
@@ -115,13 +118,12 @@ export class ProfileHeader {
 
         console.log("PROFILE UPDATE:", res);
 
-        if (res?.result) {
-          localStorage.setItem("profile", JSON.stringify(res.result));
-          this.profile = res.result;
+        if (res?.profile) {
+          localStorage.setItem("profile", JSON.stringify(res.profile));
+          this.profile = res.profile;
         }
 
         this.closeModal();
-        window.location.reload();
       },
       error: err => console.error("Erro update profile:", err)
     });
