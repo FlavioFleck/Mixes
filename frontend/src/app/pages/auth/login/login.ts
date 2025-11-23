@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angu
 import { RouterModule } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserStateService } from '../../../services/user-state';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule   // ⬅️ FALTAVA ISSO
+    RouterModule   
   ],
   templateUrl: './login.html',
   styleUrl: './login.css',
@@ -24,7 +25,8 @@ export class Login {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private userState: UserStateService  
   ) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -40,12 +42,15 @@ export class Login {
     this.http.post<any>('http://localhost:5010/auth/login', { email, password })
       .subscribe({
         next: (res) => {
+
           localStorage.setItem('token', res.token);
 
           this.http.get<any>('http://localhost:5010/profile/me', {
             headers: { Authorization: `Bearer ${res.token}` }
           }).subscribe(profileRes => {
+
             localStorage.setItem('profile', JSON.stringify(profileRes.profile));
+            this.userState.updateUser(profileRes.profile);
             this.router.navigate(['/']);
           });
         },

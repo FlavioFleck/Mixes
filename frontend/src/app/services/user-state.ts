@@ -6,16 +6,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserStateService {
 
-  private userDataSubject = new BehaviorSubject<any>(this.getLocalUser());
-  userData$ = this.userDataSubject.asObservable();
+  private userSource = new BehaviorSubject<any>(null);
 
-  updateUser(data: any) {
-    localStorage.setItem('profile', JSON.stringify(data));
-    this.userDataSubject.next(data);
-  }
+  user$ = this.userSource.asObservable();
 
-  private getLocalUser() {
-    const raw = localStorage.getItem('profile');
-    return raw ? JSON.parse(raw) : null;
+  updateUser(profile: any) {
+    this.userSource.next(profile);
   }
 }

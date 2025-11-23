@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserStateService } from '../../../services/user-state';
 
 @Component({
   selector: 'app-profile-header',
@@ -24,7 +25,7 @@ export class ProfileHeader {
   username: string = '';
   selectedImage: File | null = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userState: UserStateService) {  
     const token = localStorage.getItem("token");
     const savedProfile = localStorage.getItem("profile");
 
@@ -97,6 +98,8 @@ export class ProfileHeader {
         if (res?.profile) {
           localStorage.setItem("profile", JSON.stringify(res.profile));
           this.profile = res.profile;
+
+          this.userState.updateUser(res.profile);
         }
 
         this.closeModal();
