@@ -16,8 +16,8 @@ export class ProfileHeader {
   isLoggedIn = false;
   isEditModalOpen = false;
 
-  user: any = null;      
-  profile: any = null;  
+  user: any = null;
+  profile: any = null;
 
   name: string = '';
   bio: string = '';
@@ -65,11 +65,6 @@ export class ProfileHeader {
       this.bio = this.profile.bio || "";
       this.username = this.profile.username || "";
     }
-
-    if (this.user) {
-      this.name = this.user.name || "";
-    }
-
     this.isEditModalOpen = true;
   }
 
@@ -80,28 +75,10 @@ export class ProfileHeader {
   saveProfile() {
     const token = localStorage.getItem("token");
 
-    const userId = this.user?.sub;
-    if (!userId) {
-      console.error("ERRO FATAL: user.sub não encontrado no token");
+    if (!token) {
+      console.error("Token não encontrado!");
       return;
     }
-
-    this.http.put(`http://localhost:5010/user/update/${userId}`, {
-      name: this.name
-    }).subscribe({
-      next: (res: any) => {
-        console.log("USER UPDATE:", res);
-
-        if (res?.token) {
-          localStorage.setItem("token", res.token);
-          
-          const decoded = this.decodeToken(res.token);
-          this.user = decoded;
-          this.name = decoded.name;
-        }
-      },
-      error: err => console.error("Erro update user:", err)
-    });
 
     const formData = new FormData();
     formData.append("bio", this.bio);
@@ -115,7 +92,6 @@ export class ProfileHeader {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: (res: any) => {
-
         console.log("PROFILE UPDATE:", res);
 
         if (res?.profile) {
