@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -15,28 +15,34 @@ import { ProfileService } from '../../../services/profile.service';
 })
 export class ProfileHeader {
 
-  isOwner = false
-  isLoggedIn = false
-  isEditModalOpen = false
+  isOwner = false;
+  isLoggedIn = false;
+  isEditModalOpen = false;
 
-  user: any = null
-  profile: any = null
+  user: any = null;
+  profile: any = null;
 
-  name: string = ''
-  bio: string = ''
-  username: string = ''
-  selectedImage: File | null = null
-  imagePreview: string | null = null
+  name: string = '';
+  bio: string = '';
+  username: string = '';
+  selectedImage: File | null = null;
+  imagePreview: string | null = null;
 
-  constructor(private http: HttpClient, private userState: UserStateService, private route: ActivatedRoute, private profileService: ProfileService) {  
+  constructor(
+    private http: HttpClient,
+    private userState: UserStateService,
+    private route: ActivatedRoute,
+    private profileService: ProfileService,
+    private cdr: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
     const token = localStorage.getItem("token");
     const savedProfile = localStorage.getItem("profile");
 
     if (token) {
       this.isLoggedIn = true;
-
       const decoded = this.decodeToken(token);
-
       if (decoded) {
         this.user = decoded;
         this.name = decoded.name || "";
@@ -48,15 +54,13 @@ export class ProfileHeader {
       this.bio = this.profile.bio || "";
       this.username = this.profile.username || "";
     }
-  }
 
-  ngOnInit() {
-    const loggedUser = JSON.parse(localStorage.getItem("profile")!)
+    this.cdr.detectChanges();
 
     this.route.paramMap.subscribe(params => {
-      const username = params.get("username")
-      if(username) {
-        this.loadUser(username)
+      const username = params.get("username");
+      if (username) {
+        this.loadUser(username);
       }
     });
   }
@@ -122,8 +126,7 @@ export class ProfileHeader {
 
         if (res?.profile) {
           localStorage.setItem("profile", JSON.stringify(res.profile));
-          // this.profile = res.profile;
-          this.loadUser(res.profile.username)
+          this.loadUser(res.profile.username);
           this.userState.updateUser(res.profile);
         }
 
@@ -134,11 +137,13 @@ export class ProfileHeader {
   }
 
   loadUser(username: string) {
-    console.log(username)
     this.profileService.getProfileByUsername(username).subscribe((profile: any) => {
       this.profile = profile;
+
       const loggedUser = JSON.parse(localStorage.getItem("profile")!);
       this.isOwner = loggedUser.user_id === profile.user_id;
+
+      this.cdr.detectChanges();
     });
   }
 }
