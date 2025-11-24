@@ -8,7 +8,7 @@
     align-items: center;
     background-color: #121212;
     border-bottom: 1px solid #333;
-    padding: 10px 30px 15px 80px;
+    padding: 10px 30px 15px 95px;
     height: 150px;
     right: 10px;
     z-index: 20;
@@ -43,7 +43,7 @@
 .profile-picture {
   position: absolute;
   top: 0;
-  left: -170px;
+  left: -185px;
   width: 180px;
   height: 180px;
   border-radius: 50%;
