@@ -15,15 +15,18 @@ export class PostWriter {
     @Output() postCreated = new EventEmitter<any>();
 
     posts: any[] = [];
-
+    user: any
     content = ""
     
     constructor(private postService: PostService) {}
 
+    ngOnInit() {
+        this.user = JSON.parse(localStorage.getItem("profile")!)
+    }
+
     createPost() {
-        const user = JSON.parse(localStorage.getItem("profile")!)
         const post = {
-            userId: user.user_id,
+            userId: this.user.user_id,
             content: this.content,
             file: null,
             songId: null,
