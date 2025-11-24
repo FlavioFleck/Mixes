@@ -9,7 +9,7 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './landing-page.html',
   styleUrls: ['./landing-page.css'],
 })
-export class LandingPageComponent {
+export class LandingPage {
 
   constructor(private router: Router) {}
 

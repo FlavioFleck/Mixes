@@ -1,35 +1,33 @@
 import { Routes } from '@angular/router';
 import { Login } from './pages/auth/login/login';
+import { Register } from './pages/auth/register/register';
+import { CreateProfile } from './pages/auth/create-profile/create-profile';
 import { Layout } from './layout/layout';
 import { Feed } from './pages/feed/feed';
 import { Profile } from './pages/profile/profile';
 import { Overview } from './pages/profile/overview/overview';
 import { Posts } from './pages/profile/posts/posts';
 import { Followers } from './pages/profile/followers/followers';
-import { Register } from './pages/auth/register/register';
-import { CreateProfile } from './pages/auth/create-profile/create-profile';
-import { LandingPageComponent } from './pages/landing-page/landing-page';
+import { LandingPage } from './pages/landing-page/landing-page';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-
-  // PÁGINA DE BOAS-VINDAS (quando não logado)
-  { path: 'welcome', component: LandingPageComponent },
-
-  // AUTH
+  // Auth
   { path: 'auth/login', component: Login },
   { path: 'auth/register', component: Register },
   { path: 'auth/profile', component: CreateProfile },
 
-  // rota "pai"
+  // Página Welcome 
+  { path: 'welcome', component: LandingPage },
+
+  // Rotas protegidas (só entra logado)
   {
     path: '',
     component: Layout,
+    canActivate: [AuthGuard],  
     children: [
-
-      // rota principal "localhost:4200/"
       { path: '', component: Feed },
 
-      // rota perfil "localhost:4200/profile/:username"
       {
         path: 'profile/:username',
         component: Profile,
@@ -37,10 +35,11 @@ export const routes: Routes = [
           { path: '', redirectTo: 'overview', pathMatch: 'full' },
           { path: 'overview', component: Overview },
           { path: 'posts', component: Posts },
-          { path: 'followers', component: Followers },
+          { path: 'followers', component: Followers }
         ]
       }
-
     ]
-  }
+  },
+
+  { path: '**', redirectTo: 'welcome' }
 ];

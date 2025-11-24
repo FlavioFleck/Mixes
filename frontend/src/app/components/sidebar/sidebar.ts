@@ -78,7 +78,7 @@ export class Sidebar implements OnInit {
     this.userState.updateUser(null); 
 
     this.menuOpen = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
 
     this.cd.detectChanges(); 
   }
