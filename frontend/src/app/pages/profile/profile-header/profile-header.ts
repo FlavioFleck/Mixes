@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { UserStateService } from '../../../services/user-state';
+import { ProfileService } from '../../../services/profile.service';
 
 @Component({
   selector: 'app-profile-header',
@@ -26,7 +27,7 @@ export class ProfileHeader {
   selectedImage: File | null = null;
   imagePreview: string | null = null;
 
-  constructor(private http: HttpClient, private userState: UserStateService) {  
+  constructor(private http: HttpClient, private userState: UserStateService, private route: ActivatedRoute, private profileService: ProfileService) {  
     const token = localStorage.getItem("token");
     const savedProfile = localStorage.getItem("profile");
 
@@ -46,6 +47,18 @@ export class ProfileHeader {
       this.bio = this.profile.bio || "";
       this.username = this.profile.username || "";
     }
+  }
+
+  ngOnInit() {
+    const username = this.route.snapshot.paramMap.get('username');
+    this.loadUser(username!);
+
+    this.route.paramMap.subscribe(params => {
+      const username = params.get("username")
+      if(username) {
+        this.loadUser(username)
+      }
+    });
   }
 
   decodeToken(token: string) {
@@ -117,6 +130,13 @@ export class ProfileHeader {
         this.closeModal();
       },
       error: err => console.error("Erro update profile:", err)
+    });
+  }
+
+  loadUser(username: string) {
+    console.log(username)
+    this.profileService.getProfileByUsername(username).subscribe((profile: any) => {
+      this.profile = profile;
     });
   }
 }

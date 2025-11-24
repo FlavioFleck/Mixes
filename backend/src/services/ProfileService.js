@@ -1,8 +1,10 @@
 import Profile from "../models/Profile.js"
 import ProfileRepository from "../repositories/ProfileRepository.js"
+import UserService from "../services/UserService.js"
 
 export default class ProfileService {
     constructor(connection) {
+        this.userService = new UserService(connection)
         this.profileRespository = new ProfileRepository(connection)
     }
 
@@ -60,12 +62,15 @@ export default class ProfileService {
 
 
     async getProfileByUsername(payload) {
+        
         const result = await this.profileRespository.getByUsername(payload);
+        const user = await this.userService.getById({id: result.user_id })
+        result.name = user.name
         return result;
     }
 
     async getAll() {
-    return await this.profileRespository.getAll();
+        return await this.profileRespository.getAll();
     }
 
     async getProfileByUserId({ user_id }) {

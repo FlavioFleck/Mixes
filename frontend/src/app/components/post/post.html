@@ -4,7 +4,7 @@
     <img [src]="'http://localhost:5010/uploads/profile/' + data.user.avatar" class="user-profile-picture">
 
     <div class="user-info">
-      <span class="username">{{data.user.name}}</span>
+      <span [routerLink]= "['/profile', data.user.username]" class="username">{{data.user.name}}</span>
       <span class="handle">@{{data.user.username}} · 10 hours ago</span>
     </div>
     

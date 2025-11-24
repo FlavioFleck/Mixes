@@ -85,12 +85,15 @@ export default class PostService {
         return result
     }
 
-    async getPostsByUserId(payload) {
-        const posts = await this.postRepository.getByUserId(payload)
+    async getPostsByUsername(payload) {
+        // console.log(payload)
+        const profile = await this.profileRepository.getByUsername(payload)
+        const posts = await this.postRepository.getByUserId({user_id: profile.user_id})
+
         const response = []
         for(const post of posts) {
-            const profile = await this.profileRepository.getByUserId(payload)
-            const user = await this.userRespository.getById({id: payload.authUserId})
+            const profile = await this.profileRepository.getByUsername(payload)
+            const user = await this.userRespository.getById({id: profile.user_id})
             const likes = await this.likeService.likeCountByPostId({id: post.id})
             const likeInfo = await this.likeService.getLikeByUserAndPost({
                 user_id: payload.authUserId,

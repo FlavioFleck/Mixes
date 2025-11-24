@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common'; // *ngIf
 
 import { PostService } from '../../services/post.service'
 import { LikeService } from '../../services/like.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './post.html',
   styleUrl: './post.css'
 })

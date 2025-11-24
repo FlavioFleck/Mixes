@@ -21,7 +21,7 @@ export const routes: Routes = [
       { path: '', component: Feed },
       
       // rota perfil "localhost:4200/profile"
-      { path: 'profile', component: Profile,
+      { path: 'profile/:username', component: Profile,
         children: [
           // redirecionamento para "overview"
           { path: '', redirectTo: 'overview', pathMatch: 'full' },

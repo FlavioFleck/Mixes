@@ -77,7 +77,7 @@ export default class UserService {
     };
 
     getById = async(payload) => {
-        const result = await this.userRepository.getById(payload.id);
+        const result = await this.userRepository.getById(payload);
         if (!result) {
             throw new Error("Falha ao buscar usuário.");
         }

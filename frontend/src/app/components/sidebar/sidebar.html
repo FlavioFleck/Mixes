@@ -8,7 +8,7 @@
       <span class="material-icons-outlined">home</span>
       Home
     </a>
-    <a routerLink="/profile" routerLinkActive="active" class="nav-item" *ngIf="isLoggedIn">
+    <a [routerLink]="['/profile', userName]" routerLinkActive="active" class="nav-item" *ngIf="isLoggedIn">
       <span class="material-icons-outlined">person_outline</span>
       Profile
     </a>

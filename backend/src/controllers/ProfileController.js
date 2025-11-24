@@ -95,7 +95,10 @@ export default class ProfileController {
     };
 
     viewProfiles = async (req, res) => {
-        const result = await this.profileService.getAll()
-        res.send({ result })
+        const payload = {
+            ...req.params
+        }
+        const result = await this.profileService.getProfileByUsername(payload)
+        res.send(result)
     }
 }
