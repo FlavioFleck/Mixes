@@ -33,11 +33,10 @@ export default class PostController {
     }
 
     getPostByUserId = async(req, res) => {
-        const { user_id } = req.params;
         const payload = {
-            user_id: user_id
+            user_id: req.params.user_id,
+            authUserId: req.user.sub
         }
-
         const posts = await this.postService.getPostsByUserId(payload)
         res.send(posts)
     }

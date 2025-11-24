@@ -31,7 +31,6 @@ export class Post {
     this.uniqueLikeId = this.data.id
     this.isOwner = this.loggedUserId === this.data.user.id;
     this.likesQTD = this.data.likesCount
-    
   }
 
   onLikeClick() {

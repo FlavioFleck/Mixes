@@ -35,6 +35,8 @@ export class PostService {
   }
 
   getPostsByUserId(user_id : any) {
-    return this.http.get(`${this.API_POST_URL}/getByUserId/${user_id}`)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.API_POST_URL}/getByUserId/${user_id}`, { headers })
   }
 }

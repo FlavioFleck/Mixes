@@ -47,5 +47,5 @@ export class Feed {
 
   onPostDeleted(postId: number) {
     this.posts = this.posts.filter(p => p.id !== postId);
-  }
+}
 }

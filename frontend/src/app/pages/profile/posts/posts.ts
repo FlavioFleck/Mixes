@@ -13,12 +13,13 @@ import { PostService } from '../../../services/post.service';
 export class Posts {
 
   @Input() loggedUserId!: number;
+  userPosts: any[] = []
   isOwner: boolean = true;
+
 
 
   constructor(private postService: PostService){}
 
-  userPosts: any[] = []
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem("profile")!)
     this.loggedUserId = user.user_id
@@ -30,7 +31,6 @@ export class Posts {
     
     this.postService.getPostsByUserId(user.user_id).subscribe((res: any) => {
       this.userPosts = res
-      console.log(res)
     })
   }
 

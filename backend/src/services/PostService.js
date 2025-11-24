@@ -90,11 +90,23 @@ export default class PostService {
         const response = []
         for(const post of posts) {
             const profile = await this.profileRepository.getByUserId(payload)
-            const user = await this.userRespository.getById({id: payload.user_id})
+            const user = await this.userRespository.getById({id: payload.authUserId})
+            const likes = await this.likeService.likeCountByPostId({id: post.id})
+            const likeInfo = await this.likeService.getLikeByUserAndPost({
+                user_id: payload.authUserId,
+                post_id: post.id
+            });
+            const already = await this.likeService.alreadyLiked({
+                user_id: payload.authUserId,
+                post_id: post.id
+            });
             response.push({
                 id: post.id,
                 content: post.content,
                 createdAt: post.created_at,
+                likesCount: likes.like_count,
+                alreadyLiked: already,
+                likeId: likeInfo.id,
                 user: {
                     id: profile.user_id,
                     name: user.name,
