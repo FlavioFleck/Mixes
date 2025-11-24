@@ -122,8 +122,8 @@ export class ProfileHeader {
 
         if (res?.profile) {
           localStorage.setItem("profile", JSON.stringify(res.profile));
-          this.profile = res.profile;
-
+          // this.profile = res.profile;
+          this.loadUser(res.profile.username)
           this.userState.updateUser(res.profile);
         }
 
@@ -137,7 +137,6 @@ export class ProfileHeader {
     console.log(username)
     this.profileService.getProfileByUsername(username).subscribe((profile: any) => {
       this.profile = profile;
-
       const loggedUser = JSON.parse(localStorage.getItem("profile")!);
       this.isOwner = loggedUser.user_id === profile.user_id;
     });
