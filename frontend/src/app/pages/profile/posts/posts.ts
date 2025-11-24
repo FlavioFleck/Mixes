@@ -20,6 +20,8 @@ export class Posts {
 
   userPosts: any[] = []
   ngOnInit() {
+    const user = JSON.parse(localStorage.getItem("profile")!)
+    this.loggedUserId = user.user_id
     this.loadUserPosts()
   }
 
@@ -30,6 +32,10 @@ export class Posts {
       this.userPosts = res
       console.log(res)
     })
+  }
+
+  onPostDeleted(postId: number) {
+    this.userPosts = this.userPosts.filter(p => p.id !== postId);
   }
 
 }

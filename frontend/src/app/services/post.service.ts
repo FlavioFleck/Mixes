@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -7,16 +7,19 @@ import { Injectable } from '@angular/core';
 
 export class PostService {
   private API_POST_URL = 'http://localhost:5010/post'
-  private API_LIKE_URL = 'http://localhost:5010/like'
 
   constructor(private http: HttpClient) {}
 
-  like(like: any) {
-    return this.http.post(`${this.API_LIKE_URL}/create`, like)
+  createPost(post: any) {
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post(`${this.API_POST_URL}/create`, post, { headers })
   }
 
-  createPost(post: any) {
-    return this.http.post(`${this.API_POST_URL}/create`, post)
+  deletePost(postId: any) {
+    return this.http.delete(`${this.API_POST_URL}/delete/${postId}`)
   }
 
   getPostId() {
@@ -24,7 +27,11 @@ export class PostService {
   }
 
   getPosts() {
-    return this.http.get(`${this.API_POST_URL}/getAll`)
+    const token = localStorage.getItem('token');
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.get(`${this.API_POST_URL}/getAll`, { headers })
   }
 
   getPostsByUserId(user_id : any) {

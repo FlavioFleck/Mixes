@@ -36,7 +36,7 @@ export default class PostRepository {
     }
 
     async getByUserId({user_id}) {
-        const query = "SELECT * FROM posts WHERE user_id = ?"
+        const query = "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC"
         const [info] = await this.connection.query(query, [user_id])
         return info
     }

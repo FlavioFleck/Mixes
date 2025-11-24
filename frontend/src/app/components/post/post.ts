@@ -1,7 +1,8 @@
-import { Component, HostListener, Input} from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common'; // *ngIf
 
 import { PostService } from '../../services/post.service'
+import { LikeService } from '../../services/like.service';
 
 @Component({
   selector: 'app-post',
@@ -13,25 +14,45 @@ import { PostService } from '../../services/post.service'
 export class Post {
   @Input() data: any
   @Input() loggedUserId!: number;
+
+  @Output() deleted = new EventEmitter<number>();
   
   isOwner: boolean = true;
 
   public isMenuOpen = false;
   public liked = false;
+  public likesQTD = 0;
+  uniqueLikeId: string = '';
 
-  constructor(private postService: PostService){}
+
+  constructor(private postService: PostService, private likeService: LikeService){}
 
   ngOnInit() {
+    this.uniqueLikeId = this.data.id
     this.isOwner = this.loggedUserId === this.data.user.id;
+    this.likesQTD = this.data.likesCount
+    
   }
 
   onLikeClick() {
-    this.liked = !this.liked
+    const like = {
+      user_id: this.loggedUserId,
+      post_id: this.data.id,
+      like_id: this.data.likeId
+    };
 
-    if(this.liked) {
-      console.log("like feito!")
+    if(!this.data.alreadyLiked) {
+      this.likeService.createLike(like).subscribe((res: any) => {
+        this.likesQTD = res.like_count;
+        this.data.alreadyLiked = true;
+        this.data.likeId = res.id; 
+      })
     } else {
-      console.log("like desfeito!")
+      this.likeService.deleteLike(like).subscribe((res: any) => {
+        this.likesQTD = res.like_count;
+        this.data.alreadyLiked = false;
+        this.data.likeId = null;
+      })
     }
   }
 
@@ -44,7 +65,7 @@ export class Post {
   // listener que "escuta" cliques no documento inteiro
   @HostListener('document:click')
   onDocumentClick() {
-      this.isMenuOpen = false;
+    this.isMenuOpen = false;
   }
 
   editPost() {
@@ -52,6 +73,9 @@ export class Post {
   }
 
   deletePost() {
-    console.log("Delete post", this.data);
+    const postId = this.data.id
+     this.postService.deletePost(postId).subscribe((res: any) => {
+      this.deleted.emit(postId)
+    })
   }
 }

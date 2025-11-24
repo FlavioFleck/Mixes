@@ -189,18 +189,18 @@
     text-decoration: none;
 }
 
-.like::before {
+.likeLabel::before {
     content: "favorite_border";
 }
 
-input#like {
+input.like {
     display: none;
 }
 
-input#like:checked + .like {
+input.like:checked + .likeLabel {
     color: #E11D48
 }
 
-input#like:checked + .like::before {
+input.like:checked + .likeLabel::before {
     content: "favorite";
 }

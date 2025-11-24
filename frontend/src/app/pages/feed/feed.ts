@@ -44,4 +44,8 @@ export class Feed {
     const userId = user.user_id
     return userId
   }
+
+  onPostDeleted(postId: number) {
+    this.posts = this.posts.filter(p => p.id !== postId);
+  }
 }

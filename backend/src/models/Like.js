@@ -1,6 +1,6 @@
 export default class Like {
-    constructor({userId, postId}) {
-        this.userId = userId
-        this.postId = postId
+    constructor({user_id, post_id}) {
+        this.user_id = user_id
+        this.post_id = post_id
     }
 }

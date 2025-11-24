@@ -5,13 +5,22 @@ export default class PostController {
         this.postService = new PostService(connection)
     }
 
-    createPost = async (req, res) => {
+    createPost = async(req, res) => {
         const payload = {
-            ...req.body
+            ...req.body,
+            authUserId: req.user.sub
         }
 
         const post = await this.postService.createPost(payload)
         res.send(post)
+    }
+
+    delete = async(req, res) => {
+        const payload = {
+            ...req.params
+        }
+        const result = await this.postService.deletePost(payload)
+        res.send(result)
     }
 
     getPostById = async(req, res) => {
@@ -34,7 +43,10 @@ export default class PostController {
     }
 
     getAllPosts = async(req, res) => {
-        const posts = await this.postService.getAllPosts();
+        const payload = {
+            authUserId: req.user.sub
+        }
+        const posts = await this.postService.getAllPosts(payload);
         return res.send(posts)
     }
 }
