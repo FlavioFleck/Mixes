@@ -17,9 +17,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.post("/create", authMiddleware, upload.single("profileImage"), profileController.createProfile);
-router.delete("/delete", authMiddleware, profileController.deleteProfile)
-router.put("/update", authMiddleware, upload.single("profileImage"), profileController.updateProfile)
-router.get("/me", authMiddleware, profileController.viewMyProfile)
-router.get("/:username", profileController.viewProfiles)
+router.delete("/delete", authMiddleware, profileController.deleteProfile);
+router.put("/update", authMiddleware, upload.single("profileImage"), profileController.updateProfile);
+router.get("/me", authMiddleware, profileController.viewMyProfile);
+router.get("/getAll", profileController.getAll);
+router.get("/:username", profileController.viewProfiles);
+
 
 export default router

@@ -35,4 +35,8 @@ createProfile(data: FormData) {
   getProfileByUsername(username: string) {
     return this.http.get(`${this.API_URL}/${username}`);
   }
+
+  getProfiles() {
+    return this.http.get(`${this.API_URL}/getAll`)
+  }
 }

@@ -69,8 +69,21 @@ export default class ProfileService {
         return result;
     }
 
-    async getAll() {
-        return await this.profileRespository.getAll();
+    async getProfiles() {
+        const profiles = await this.profileRespository.getAll();
+        const result = [];
+        for(const profile of profiles){
+            const user = await this.userService.getById({id: profile.user_id})
+            const payload = {
+                username: profile.username,
+                bio: profile.bio,
+                profileImage: profile.profile_image,
+                userId: profile.user_id,
+                name: user.name
+            }
+            result.push(payload);
+        }
+        return result;
     }
 
     async getProfileByUserId({ user_id }) {

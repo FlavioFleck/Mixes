@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-header',
@@ -18,14 +19,14 @@ export class Header {
 
   constructor(
     private router: Router,
+    private profileService: ProfileService
   ) {}
 
-  // simulação de busca
-  MOCK_USERS = [
-    { name: "Atreus", username: "htt_def", image: "https://i.pravatar.cc/40?img=5" },
-    { name: "Thiago", username: "httpsrealitys", image: "https://i.pravatar.cc/40?img=12" },
-    { name: "Neto", username: "http_neto", image: "https://i.pravatar.cc/40?img=30" },
-  ];
+  profiles: any[] = [];
+
+  ngOnInit(){
+    this.getProfile();
+  }
 
   onSearchChange() {
     if (this.searchQuery.trim() === "") {
@@ -34,12 +35,19 @@ export class Header {
       return;
     }
 
-    this.results = this.MOCK_USERS.filter(u =>
+    console.log(this.profiles)
+    this.results = this.profiles.filter(u =>
       u.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
       u.username.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
 
     this.showDropdown = true;
+  }
+
+  getProfile(){
+    this.profileService.getProfiles().subscribe((profiles: any) => {
+      this.profiles = profiles
+    })
   }
 
   goToProfile(username: string) {

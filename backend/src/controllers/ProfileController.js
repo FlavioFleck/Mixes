@@ -101,4 +101,10 @@ export default class ProfileController {
         const result = await this.profileService.getProfileByUsername(payload)
         res.send(result)
     }
+
+    getAll = async (req, res) => {
+        const result = await this.profileService.getProfiles()
+        res.send(result);
+        // console.log(result)
+    }
 }
