@@ -25,27 +25,39 @@ export default class ProfileService {
     }
 
     async updateProfile(payload) {
-        const { userId } = payload
+        const { userId, bio, username, profileImage } = payload;
 
-        const existingProfile = await this.profileRespository.getByUserId({user_id: userId})
+        if (!userId) {
+            throw new Error("ID do usuário não fornecido.");
+        }
+
+        const existingProfile = await this.profileRespository.getByUserId({ user_id: userId });
+        console.log("Perfil encontrado:", existingProfile); 
+
         if (!existingProfile) {
             throw new Error("Perfil não encontrado.");
         }
-        
-        let updatedData = {
-            ...existingProfile, 
-            ...payload,
-            profileImage: payload.profileImage ?? existingProfile.profile_image
+
+        const updatedData = {
+            username: username ?? existingProfile.username,
+            bio: bio ?? existingProfile.bio,
+            profileImage: profileImage ?? existingProfile.profile_image,
+            userId: existingProfile.user_id
         };
 
-        const updatedProfile = new Profile (updatedData);
+        const updatedProfile = new Profile(updatedData);
+        console.log("Atualizando profile com:", updatedProfile);
 
         const result = await this.profileRespository.update(updatedProfile);
-        if(!result) {
-            throw new Error("Falha ao atualizar dados.")
+        console.log("Resultado do update:", result);
+        if (!result) {
+            throw new Error("Falha ao atualizar dados.");
         }
-        return result;
+
+        const profileAfterUpdate = await this.profileRespository.getByUserId({ user_id: userId });
+        return profileAfterUpdate;
     }
+
 
     async getProfileByUsername(payload) {
         const result = await this.profileRespository.getByUsername(payload);

@@ -62,11 +62,11 @@ export default class ProfileController {
             const payload = {
                 userId: req.user.sub,
                 ...req.body,
-                profileImage: req.file ? req.file.filename : undefined
+                profileImage: req.file ? req.file.filename : null
             };
             const result = await this.profileService.updateProfile(payload);
             return res.status(200).send({
-                result: result
+                profile: result
             });            
         } catch (error) {
             console.error(error);

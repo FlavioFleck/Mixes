@@ -1,4 +1,5 @@
 import UserService from "../services/UserService.js"
+import { generateToken } from "../utils/jwt.js";
 
 export default class UserController {
     constructor(connection) {
@@ -26,11 +27,16 @@ export default class UserController {
 
     updateUser = async(req, res) => {
         try {
-            const payload = {id: req.params.id, ...req.body};
-            const user = await this.userService.updateUser(payload);
+            const payload = {
+                ...req.body,
+                userId: req.user.sub
+            };
+
+            const {user, token} = await this.userService.updateUser(payload);
             return res.status(200).send({
                 message: "Usuário atualizado com sucesso!",
-                user: user
+                user: user,
+                token: token
             });
         } catch (error) {
             if(error.message.includes("Usuário não encontrado")) {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { UserStateService } from '../../../services/user-state';
 
 @Component({
   selector: 'app-profile-header',
@@ -16,15 +17,16 @@ export class ProfileHeader {
   isLoggedIn = false;
   isEditModalOpen = false;
 
-  user: any = null;      
-  profile: any = null;  
+  user: any = null;
+  profile: any = null;
 
   name: string = '';
   bio: string = '';
   username: string = '';
   selectedImage: File | null = null;
+  imagePreview: string | null = null;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private userState: UserStateService) {  
     const token = localStorage.getItem("token");
     const savedProfile = localStorage.getItem("profile");
 
@@ -57,7 +59,18 @@ export class ProfileHeader {
   }
 
   handleImage(event: any) {
-    this.selectedImage = event.target.files[0];
+    const file = event.target.files[0];
+
+    if (file) {
+      this.selectedImage = file;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagePreview = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
   }
 
   openModal() {
@@ -65,11 +78,6 @@ export class ProfileHeader {
       this.bio = this.profile.bio || "";
       this.username = this.profile.username || "";
     }
-
-    if (this.user) {
-      this.name = this.user.name || "";
-    }
-
     this.isEditModalOpen = true;
   }
 
@@ -80,25 +88,10 @@ export class ProfileHeader {
   saveProfile() {
     const token = localStorage.getItem("token");
 
-    const userId = this.user?.sub;
-    if (!userId) {
-      console.error("ERRO FATAL: user.sub não encontrado no token");
+    if (!token) {
+      console.error("Token não encontrado!");
       return;
     }
-
-    this.http.put(`http://localhost:5010/user/update/${userId}`, {
-      name: this.name
-    }).subscribe({
-      next: (res: any) => {
-        console.log("USER UPDATE:", res);
-
-        if (res?.result) {
-          localStorage.setItem("user", JSON.stringify(res.result));
-          this.user = res.result;
-        }
-      },
-      error: err => console.error("Erro update user:", err)
-    });
 
     const formData = new FormData();
     formData.append("bio", this.bio);
@@ -112,16 +105,16 @@ export class ProfileHeader {
       headers: { Authorization: `Bearer ${token}` }
     }).subscribe({
       next: (res: any) => {
-
         console.log("PROFILE UPDATE:", res);
 
-        if (res?.result) {
-          localStorage.setItem("profile", JSON.stringify(res.result));
-          this.profile = res.result;
+        if (res?.profile) {
+          localStorage.setItem("profile", JSON.stringify(res.profile));
+          this.profile = res.profile;
+
+          this.userState.updateUser(res.profile);
         }
 
         this.closeModal();
-        window.location.reload();
       },
       error: err => console.error("Erro update profile:", err)
     });

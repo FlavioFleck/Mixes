@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { UserStateService } from '../../services/user-state';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,31 +13,54 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Sidebar implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router, 
+    private userState: UserStateService,
+    private cd: ChangeDetectorRef 
+  ){}
 
   menuOpen = false;
-
   isLoggedIn = false;
   userName: string | null = null;
   userImage: string | null = null;
 
-ngOnInit() {
-  const user = localStorage.getItem('profile');
+  ngOnInit() {
+    this.loadFromLocalStorage();
+    this.cd.detectChanges(); 
 
-  if (user) {
-    const parsed = JSON.parse(user);
-    this.userName = parsed.username || null;
-    this.userImage = parsed.profile_image
-      ? `http://localhost:5010/uploads/profile/${parsed.profile_image}`
-      : null;
-    this.isLoggedIn = true;
-  } else {
-    this.isLoggedIn = false;
+    this.userState.user$.subscribe((profile: any) => {
+      if (profile) {
+        this.isLoggedIn = true;
+        this.userName = profile.username;
+        this.userImage = profile.profile_image
+          ? `http://localhost:5010/uploads/profile/${profile.profile_image}`
+          : null;
+      } else {
+        this.isLoggedIn = false;
+        this.userName = null;
+        this.userImage = null;
+      }
+
+      this.cd.detectChanges(); 
+    });
   }
-}
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
+  loadFromLocalStorage() {
+    const user = localStorage.getItem('profile');
+    if (user) {
+      const parsed = JSON.parse(user);
+      this.userName = parsed.username;
+      this.userImage = parsed.profile_image
+        ? `http://localhost:5010/uploads/profile/${parsed.profile_image}`
+        : null;
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
+  }
+
+  toggleMenu() { 
+    this.menuOpen = !this.menuOpen; 
   }
 
   login() {
@@ -51,8 +75,12 @@ ngOnInit() {
     this.userImage = null;
     this.isLoggedIn = false;
 
+    this.userState.updateUser(null); 
+
     this.menuOpen = false;
     this.router.navigate(['/']);
+
+    this.cd.detectChanges(); 
   }
 
   @HostListener('document:click', ['$event'])
