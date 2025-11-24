@@ -53,11 +53,11 @@
     <ng-template #feedMenu>
       <a class="menu-item">
         <span class="material-icons-outlined">block</span>
-        <span class="menu-text">Block @username</span>
+        <span class="menu-text">Block @{{data.user.username}}</span>
       </a>
       <a class="menu-item">
         <span class="material-icons-outlined">person_add_alt</span>
-        <span class="menu-text">Follow @username</span>
+        <span class="menu-text">Follow @{{data.user.username}}</span>
       </a>
     </ng-template>
 

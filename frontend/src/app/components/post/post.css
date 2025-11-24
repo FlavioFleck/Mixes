@@ -6,6 +6,28 @@
     margin-bottom: 20px;
     border-top-width: 0;
     position: relative;
+
+    overflow: hidden;
+    max-height: 1000px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height .7s ease, opacity .7s ease, transform .7s ease, margin .5s ease;
+}
+
+:host.creating {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    margin-bottom: 0;
+}
+
+:host(.deleting) {
+    max-height: 0px;
+    opacity: 0;
+    transform: translateY(-10px);
+    margin: 0;
+
+    transition: max-height .2s ease-out, opacity .2s ease-out, transform .2s ease-out, margin .2s;
 }
 
 :host::before {
@@ -18,6 +40,8 @@
     background: linear-gradient(90deg, #136F63, #592AB8);
     border-radius: 6px 6px 0 0;
 }
+
+
 
 .post-header {
     display: flex;
@@ -177,10 +201,11 @@
     font-size: 0.95rem;
     font-family: 'Jost', sans-serif;
     transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
 
-.menu-item:hover .menu-text {
-    text-decoration: underline;
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .menu-item .material-icons-outlined {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
+import { Component, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
 import { CommonModule } from '@angular/common'; // *ngIf
 
 import { PostService } from '../../services/post.service'
@@ -17,21 +17,33 @@ export class Post {
   @Input() loggedUserId!: number;
 
   @Output() deleted = new EventEmitter<number>();
+
+  
   
   isOwner: boolean = true;
 
   public isMenuOpen = false;
   public liked = false;
   public likesQTD = 0;
+  isDeleting = false;
   uniqueLikeId: string = '';
 
 
   constructor(private postService: PostService, private likeService: LikeService){}
 
+  @HostBinding('class.creating') creatingClass = true;
+  @HostBinding('class.deleting') get deleting() {
+    return this.isDeleting;
+  }
+
   ngOnInit() {
     this.uniqueLikeId = this.data.id
     this.isOwner = this.loggedUserId === this.data.user.id;
     this.likesQTD = this.data.likesCount
+
+    requestAnimationFrame(() => {
+      this.creatingClass = false;
+    });
   }
 
   onLikeClick() {
@@ -72,10 +84,15 @@ export class Post {
     console.log("Edit post", this.data);
   }
 
+  
   deletePost() {
-    const postId = this.data.id
-     this.postService.deletePost(postId).subscribe((res: any) => {
-      this.deleted.emit(postId)
-    })
+    this.isDeleting = true
+    setTimeout(() => {
+      const postId = this.data.id
+      this.postService.deletePost(postId).subscribe((res: any) => {
+        this.deleted.emit(postId)
+      })
+    }, 0.2 * 1000);
+    
   }
 }

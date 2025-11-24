@@ -1,10 +1,10 @@
 .overview-container {
   width: 100%;
   max-width: 100%; /* pega a overview por completo */
-  padding: 20px 20px;
+  padding: 0px 20px;
   color: #fff;
   font-family: "Itim";
-  max-height: calc(100vh - 270px);
+  max-height: calc(100vh - 232px);
   overflow-y: auto;
   scrollbar-width: none;
   scrollbar-color: #333 #121212;
@@ -29,7 +29,7 @@
   display: inline-block;
   font-size: 28px;
   font-weight: 200;
-  margin-bottom: 15px
+  margin-bottom: 10px;
 }
 
 .section-title:hover {
