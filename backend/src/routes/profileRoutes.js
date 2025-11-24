@@ -19,7 +19,6 @@ const upload = multer({ storage });
 router.post("/create", authMiddleware, upload.single("profileImage"), profileController.createProfile);
 router.delete("/delete", authMiddleware, profileController.deleteProfile)
 router.put("/update", authMiddleware, upload.single("profileImage"), profileController.updateProfile)
-// router.get("/get/:id", profileController.viewProfile)
 router.get("/me", authMiddleware, profileController.viewMyProfile)
 router.get("/:username", profileController.viewProfiles)
 

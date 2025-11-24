@@ -1,8 +1,36 @@
 <div class="header-container">
 
-  <div class="search-bar">
-    <span class="material-icons-outlined">search</span>
-    <input type="text" placeholder="Search">
+  <div class="search-wrapper">
+    <div class="search-bar">
+      <span class="material-icons-outlined">search</span>
+      <input 
+        type="text" 
+        placeholder="Search"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchChange()"
+      >
+    </div>
+
+    <!-- DROPDOWN RESULTADOS -->
+    <div class="results-dropdown" *ngIf="showDropdown">
+      
+      <div 
+        class="result-item" 
+        *ngFor="let user of results"
+        (click)="goToProfile(user.username)"
+      >
+        <img class="avatar" [src]="user.image" alt="">
+        <div class="info">
+          <span class="name">{{ user.name }}</span>
+          <span class="username">@{{ user.username }}</span>
+        </div>
+      </div>
+
+      <div class="no-results" *ngIf="results.length === 0">
+        Nenhum usuário encontrado.
+      </div>
+
+    </div>
   </div>
-  
+
 </div>
