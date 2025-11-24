@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import { validateCPF } from "../utils/validateCpf.js";
+import { validateEmail } from "../utils/validateComponents.js";
 import { generateToken } from "../utils/jwt.js";
 import bcrypt from "bcrypt";
 import UserRepository from "../repositories/UserRepository.js";
@@ -14,6 +15,14 @@ export default class AuthService {
         
         if(!validateCPF(cpf)) {
             throw new Error("CPF inválido.")
+        }
+
+        if(!validateEmail(email)) {
+            throw new Error("Email inválido.")
+        }
+
+        if(!password || password.length < 6){
+            throw new Error("Senha deve possuir no mínimo 6 caracteres.")
         }
 
         const existingUser = await this.userRepository.getByEmail({ email });

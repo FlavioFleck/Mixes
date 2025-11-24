@@ -35,6 +35,16 @@ export default class AuthController {
                     error: error.message
                 });
             }
+            if(error.message.includes("Email inválido")){
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
+            if(error.message.includes("Senha deve possuir no mínimo 6 caracteres")){
+                return res.status(400).send({
+                    error: error.message
+                });
+            }
             console.error(error);
             return res.status(500).send({
                 error: "Erro interno no servidor."
