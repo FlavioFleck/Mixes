@@ -24,6 +24,22 @@
   position: relative;
 }
 
+.profile-picture-container {
+  position: relative;
+  animation: fadeInProfile 0.5s ease;
+}
+
+@keyframes fadeInProfile {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .profile-picture {
   position: absolute;
   top: 0;
@@ -37,6 +53,8 @@
   background-position: center;
   flex-shrink: 0;
 }
+
+
 
 .user-info {
   max-width: 600px;

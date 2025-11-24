@@ -7,13 +7,8 @@
   <div class="left">
 
     <!-- Foto de perfil -->
-    <div 
-      class="profile-picture"
-      [ngStyle]="{
-        'background-image': profile?.profile_image 
-          ? 'url(http://localhost:5010/uploads/profile/' + profile.profile_image + ')'
-          : 'url(assets/images/default-avatar.png)'
-      }">
+    <div class="profile-picture-container">
+      <div class="profile-picture" [ngStyle]="{'background-image': profile?.profile_image ? 'url(http://localhost:5010/uploads/profile/' + profile.profile_image + ')': 'url(assets/images/default-avatar.png)'}"></div>
     </div>
 
     <div class="user-info">
