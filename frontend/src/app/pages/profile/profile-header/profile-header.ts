@@ -15,17 +15,18 @@ import { ProfileService } from '../../../services/profile.service';
 })
 export class ProfileHeader {
 
-  isLoggedIn = false;
-  isEditModalOpen = false;
+  isOwner = false
+  isLoggedIn = false
+  isEditModalOpen = false
 
-  user: any = null;
-  profile: any = null;
+  user: any = null
+  profile: any = null
 
-  name: string = '';
-  bio: string = '';
-  username: string = '';
-  selectedImage: File | null = null;
-  imagePreview: string | null = null;
+  name: string = ''
+  bio: string = ''
+  username: string = ''
+  selectedImage: File | null = null
+  imagePreview: string | null = null
 
   constructor(private http: HttpClient, private userState: UserStateService, private route: ActivatedRoute, private profileService: ProfileService) {  
     const token = localStorage.getItem("token");
@@ -50,8 +51,7 @@ export class ProfileHeader {
   }
 
   ngOnInit() {
-    const username = this.route.snapshot.paramMap.get('username');
-    this.loadUser(username!);
+    const loggedUser = JSON.parse(localStorage.getItem("profile")!)
 
     this.route.paramMap.subscribe(params => {
       const username = params.get("username")
@@ -137,6 +137,9 @@ export class ProfileHeader {
     console.log(username)
     this.profileService.getProfileByUsername(username).subscribe((profile: any) => {
       this.profile = profile;
+
+      const loggedUser = JSON.parse(localStorage.getItem("profile")!);
+      this.isOwner = loggedUser.user_id === profile.user_id;
     });
   }
 }
