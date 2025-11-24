@@ -21,7 +21,7 @@
 /* Painel esquerdo */
 .left-panel {
   width: 35%;
-  background: #0f0f0f;
+  background: #000000;
   padding: 50px 80px;
   display: flex;
   flex-direction: column;
@@ -84,8 +84,7 @@
   padding: 14px;
   font-weight: bold;
   border: 2px solid transparent;
-  background: linear-gradient(#111, #111) padding-box,
-              linear-gradient(to right, #1daf9c, #6730d6) border-box;
+  background: linear-gradient(#000000, #000000) padding-box, linear-gradient(to right, #1daf9c, #6730d6) border-box;
   color: white;
   cursor: pointer;
   letter-spacing: 1px;
@@ -93,8 +92,7 @@
 }
 
 .signup-btn:hover {
-  background: linear-gradient(#181818, #181818) padding-box,
-              linear-gradient(to right, #1daf9c, #6730d6) border-box;
+  background: linear-gradient(#181818, #181818) padding-box, linear-gradient(to right, #1daf9c, #6730d6) border-box;
   transform: translateY(-2px);
   box-shadow: 0 0 12px rgba(0,0,0,0.4);
 }
@@ -107,7 +105,6 @@
 }
 
 .login-text a {
-  margin-left: 6px;
   color: #b400ff;
   text-decoration: none;
   transition: 0.2s ease;
