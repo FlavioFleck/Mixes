@@ -1,20 +1,34 @@
-<div class="landing fade-in">
+<div class="landing-container fade-in">
 
-  <div class="brand-section">
-    <h1 class="title">Um mix de sentimentos</h1>
-    <div class="logo">SeuLogo</div>
+  <!-- efeito aurora -->
+  <div class="background-effects">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
   </div>
 
-  <div class="auth-section">
+  <!-- conteúdo principal -->
+  <div class="content-wrapper">
+    <div class="brand-section">
+      <h1 class="title">Um mix de sentimentos</h1>
+      <div class="logo">MIXES</div>
+    </div>
 
-    <button class="btn primary" (click)="goToRegister()">
-      Criar conta
-    </button>
+    <div class="auth-section">
 
-    <button class="btn secondary" (click)="goToLogin()">
-      Entrar
-    </button>
-
+      <span class="join-text">Join us</span>
+      
+      <button class="btn" (click)="goToRegister()">
+        Criar conta
+      </button>
+      <button class="btn" (click)="goToLogin()">
+        Entrar
+      </button>
+    </div>
   </div>
+
+  <!-- footer -->
+  <footer class="footer">
+    <p> © 2025 Mixes</p>
+  </footer>
 
 </div>

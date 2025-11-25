@@ -1,100 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;600&family=Lato:wght@700&display=swap');
-
 :host {
   display: block;
   height: 100vh;
-  background: #000;
+  background: #050505;
   color: #fff;
   font-family: 'Jost', sans-serif;
+  overflow: hidden;
+  position: relative;
 }
 
-/* ANIMAÇÃO FADE-IN */
+/* animação fade-in */
 .fade-in {
   opacity: 0;
-  animation: fadeIn 0.9s ease forwards;
+  animation: fadeIn 1.5s ease forwards;
 }
 
 @keyframes fadeIn {
   to { opacity: 1; }
 }
 
-/* LAYOUT PRINCIPAL */
-.landing {
+.landing-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+/* efeito de fundo */
+.background-effects {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px); /* efeito fumaça/aurora */
+  opacity: 0.4; /* Bem suave */
+  animation: float 10s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+  top: -10%;
+  left: -10%;
+  width: 50vw;
+  height: 50vw;
+  background: #136F63;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  bottom: -10%;
+  right: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: #592AB8;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 50px) scale(1.1); }
+}
+
+/* layout do conteúdo */
+.content-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8vw;
-  height: 100%;
+  padding: 0 10vw;
+  flex-grow: 1;
+  margin-top: 40px;
 }
 
-/* ESQUERDA — TEXTO + LOGO */
+/* lado esquerdo */
 .brand-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
 }
 
 .title {
-  font-size: 3.5rem;
-  font-weight: 600;
+  font-size: 2.4rem;
+  font-weight: 400;
+  color: #ccc;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
 
 .logo {
   font-family: 'Lato', sans-serif;
-  font-size: 10rem;
-  font-weight: 700;
-  letter-spacing: -4px;
-  color: #eee;
+  font-size: 12rem;
+  font-weight: 600;
+  letter-spacing: -6px;
+  background: linear-gradient(90deg, #1a9b8a, #7437ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 10px 20px rgba(89, 42, 184, 0.2));
+  cursor: pointer;
 }
 
-/* DIREITA — BOTÕES */
+/* lado direito */
 .auth-section {
   display: flex;
   flex-direction: column;
   width: 320px;
-  gap: 16px;
+  gap: 20px;
 }
 
-/* BOTÕES */
+.join-text {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* estilo dos botões */
 .btn {
   width: 100%;
-  padding: 14px 0;
-  border-radius: 30px;
-  font-size: 1.2rem;
+  padding: 16px 0;
+  border-radius: 50px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-family: 'Jost', sans-serif;
   cursor: pointer;
-  transition: 0.3s ease;
-  border: 1px solid transparent;
-}
-
-.primary {
-  background: #fff;
-  color: #000;
-}
-
-.primary:hover {
-  background: #dcdcdc;
-}
-
-.secondary {
-  background: transparent;
-  border: 1px solid #333;
   color: #fff;
+  border: 2px solid transparent;
+  background-image: 
+    linear-gradient(#050505, #050505), 
+    linear-gradient(90deg, #1a9787, #6730d6);
+  background-origin: padding-box, border-box;
+  background-clip: padding-box, border-box;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
-.secondary:hover {
-  background: #111;
+.btn:hover {
+  background-image: 
+    linear-gradient(90deg, #1a9787, #6730d6), 
+    linear-gradient(90deg, #1a9787, #6730d6);
+  box-shadow: 0 6px 30px rgba(19, 111, 99, 0.3);
+  transform: translateY(-3px);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .landing {
+/* footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.2;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  user-select: none;
+}
+
+/* responsividade */
+@media (max-width: 1100px) {
+  .content-wrapper {
     flex-direction: column;
     justify-content: center;
-    gap: 40px;
+    gap: 50px;
     text-align: center;
+    padding: 0 20px;
   }
 
   .logo {
-    font-size: 7rem;
+    font-size: 5.5rem;
+    letter-spacing: -3px;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .auth-section {
+    width: 100%;
+    max-width: 320px;
+  }
+  
+  .blob {
+    opacity: 0.25;
   }
 }
