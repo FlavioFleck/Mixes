@@ -129,3 +129,10 @@
   grid-column: span 2; /* ocupa 2 colunas */
   grid-row: span 2;
 }
+
+
+@media (max-width: 1500px) {
+    .overview-container {
+      max-height: calc(100vh - 232px);
+    }
+}

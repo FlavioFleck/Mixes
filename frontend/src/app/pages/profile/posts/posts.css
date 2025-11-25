@@ -24,3 +24,11 @@
     flex-direction: column;
     gap: 0;
 }
+
+
+
+@media (max-width: 1500px) {
+    .profile-posts-container {
+      max-height: calc(100vh - 232px);
+    }
+}
